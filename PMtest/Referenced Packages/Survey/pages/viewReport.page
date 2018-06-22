@@ -1,0 +1,62 @@
+<apex:page id="thePage" showHeader="false" docType="HTML-5.0"  sidebar="false" action="{!loadSurvey}"  standardStylesheets="false" controller="SurveyBuilder.surveyQuestions" extensions="SurveyBuilder.questionBank,SurveyBuilder.surveyConfigs">   
+    <html>
+        <head>
+            <title>View Report for survey</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+            <apex:includeScript value="{!$Resource.SurveyBuilder__question}"/>
+        </head>
+        <body class="view-report-page">
+            <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            <c:topPageNavigation myPageTitle="View Report for survey" /> 
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="white-box">
+                        <div class="sectionTitle">View Report
+                            <apex:outputLink value="{!$Page.SurveyBuilder__surveyList}"  styleClass="back-btn">
+                                Go to Manage Survey
+                            </apex:outputLink>
+                        </div> 
+                    </div>
+                    
+
+                    <div class="content-box questionBoxSeparator"> 
+                
+                        
+                        <div class="clear">
+                            
+                            <c:surveySection surveyDetails="{!surveyDetails}" />  
+                                                      
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    <apex:repeat value="{!questionReport}" var="questionId" >
+                      
+                           
+                        
+                        <div class="content-box questionTopSpacing2"> 
+                            
+                            
+                            <div class="questionBox">
+                               <h3>
+                                  {!questionReport[questionId]} 
+                                </h3> 
+                                <div class="pie-graph">
+                                    <c:showGraph questionId="{!questionId}" surveyId="{!surveyDetails.Id}"/>
+                                </div>
+                            </div> 
+                            
+                            
+                        </div> 
+                        
+                       
+                    </apex:repeat> 
+                </div> 
+            </section>  
+            </div> 
+            <apex:include pageName="SurveyBuilder__surveyFooter" /> 
+        </body>
+    </html>
+</apex:page>

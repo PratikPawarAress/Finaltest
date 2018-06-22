@@ -1,0 +1,51 @@
+<apex:page >
+    <style>
+        .listingBox a.apexListing {
+           text-decoration:none;
+           color:#fff;
+           
+           font-size: 19px;
+           margin-left: 8px;
+           
+        }
+        .listingBox {
+           marging:0px;            
+           margin:0px 0px 7px 0px;
+           clear:both;
+           background:#249FE5;
+           /*background:#3B404C;*/
+           display:block;
+           padding:8px 10px 6px 9px;
+           
+           height:46px;
+           background:#3b3e4d;
+           
+           
+        }
+        
+        .exchangeArrow {
+           float: right;
+           top: 0px;
+           position: absolute;
+           right: 0px;
+        }
+    </style>
+    <section class="col-sm-12 listingBox">
+        
+        <a href="https://appexchange.salesforce.com/listingDetail?listingId=a0N3A00000DvJU0UAN" class="apexListing" target="_blank">
+            <apex:image id="theImage" value="{!$Resource.exchangeArrow}" styleClass="exchangeArrow" />
+             View our AppExchange listing</a>
+    </section>
+    <section class="col-sm-12 listingBox" style="height:64px !important;">
+         <span style="font-size: 19px; color: rgb(255, 255, 255); padding-left: 7px;">Create and publish online surveys.</span>
+        <a class="apexListing" href="https://appexchange.salesforce.com/listingDetail?listingId=a0N3A00000EvAhGUAV" target="_blank">
+
+            <span style="font-size: 15px; color: rgb(148, 223, 252); margin-left: 7px;">Check our Survey Builder app in AppExchange</span></a>
+    </section>
+     <!--<section class="col-sm-12 listingBox" style="height:64px !important;">
+         <span style="font-size:19px;color:#fff;padding-left:14px;">Create and publish online surveys.</span>
+        <a href="https://appexchange.salesforce.com/listingDetail?listingId=a0N3A00000EvAhGUAV" class="apexListing" target="_blank">
+                       
+            <span style="font-size:15px;color:#94DFFC;">Check our Survey Builder app in AppExchange</span></a>
+    </section>-->
+</apex:page>

@@ -1,0 +1,60 @@
+<apex:page standardController="TimeSheet__c" extensions="EditTimeSheetPageController" showHeader="false">
+	<apex:form >
+		<apex:slds />  
+        <script>
+        window.onload = function() {
+            if(!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
+        }
+        
+        </script>
+        <style>
+        	.secHeader{
+            		background-color: #DCDCDC;
+            	}
+            
+        </style>
+        <div class="secHeader">
+            <apex:sectionHeader title="Edit {!timesheetname}"/>
+        </div>    
+    	<div>
+            <apex:pageBlock id="EditPB" >
+                <apex:pageMessages ></apex:pageMessages>
+    	    	<apex:pageBlockSection columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Task Category"/>
+                        <apex:outputField value="{!sheet.Task_Category__c}" />
+                        <!--<apex:inputField value="{!sheet.Name}" required="true" />-->
+                    </apex:pageBlockSectionItem> 
+                    <!--<apex:pageBlockSectionItem >    
+                        <apex:outputText value="Project"/>
+                        <apex:outputText value="{!sheet.Project__r.Name}"/> 
+                    </apex:pageBlockSectionItem> -->
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Task Description"/>
+                        <apex:inputField value="{!sheet.Task_Description__c}" required="true" /> 
+                    </apex:pageBlockSectionItem>   
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Date"/>
+                        <apex:inputField value="{!sheet.Date__c}"/> 
+                    </apex:pageBlockSectionItem>         
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Hours Spent"/>
+                        <apex:inputField value="{!sheet.Hours_Spent__c}"/> 
+                    </apex:pageBlockSectionItem>       
+                   <!--- <apex:pageBlockSectionItem >
+                        <apex:outputText value="Status	"/>
+                        <apex:inputField value="{!sheet.Status__c}" /> 
+                    </apex:pageBlockSectionItem> --->
+             	</apex:pageBlockSection>            
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Save" action="{!customsave}" />
+                    <apex:commandButton value="Cancel" action="{!cancel}" />
+                </apex:pageBlockButtons>
+        	</apex:pageBlock>
+    	</div>
+
+	</apex:form>
+</apex:page>

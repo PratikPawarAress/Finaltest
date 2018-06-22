@@ -1,0 +1,226 @@
+<apex:page controller="QBsampleCon" sidebar="false" showHeader="false" standardStylesheets="false">
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Question Bank</title>
+<apex:stylesheet value="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900"/>
+<apex:stylesheet value="{!$Resource.SurveyMaster}"/>
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/ >
+<!--<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900" rel="stylesheet" type="text/css">
+<link href="assets/css/master.css" rel="stylesheet">-->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<apex:includeScript value="{!$Resource.simpleSliderJS}"/>
+<apex:stylesheet value="{!$Resource.simpleSliderCSS}"/>
+<apex:stylesheet value="{!$Resource.simpleSliderVolume}"/>
+<style>
+#dataSlider{
+display:none !important;
+}
+</style>
+<script>
+
+function myFunction() {
+  alert('Question added succuessfully');
+  window.location.reload();
+}
+
+function ShowHide(){
+document.GetElementById('field1').display='block';
+}
+</script>
+<style>
+.lookupIcon {
+ background-image: url('https://c.na30.content.force.com/servlet/servlet.FileDownload?file=01536000001JUKE') !important;
+ height:30px !important;
+ width:30px !important;
+ position:absolute !important;
+ top:6px !important;
+ right:-25px !important;
+}
+
+.lookupIconOn {
+ background-image: url('https://c.na30.content.force.com/servlet/servlet.FileDownload?file=01536000001JUKE') !important;
+ height:30px !important;
+ width:30px !important;
+ position:absolute !important;
+ top:6px !important;
+ right:-25px !important;
+}
+
+.dataSlider{
+margin: 40px !important;
+padding-left:48px;
+}
+</style>
+</head>
+
+
+<body>
+            <!-- *******MENU HTML *******************------->
+
+   <header class="mainHeader">
+    <div class="container clear">
+        <a href="https://na30.salesforce.com/apex/SBIndex" class="logo"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvk&oid=00D36000000jB0z&lastMod=1467952746000" alt=""/></a>
+        <div class="nav">
+            <ul>
+                <li><a href="https://na30.salesforce.com/apex/SBIndex" class="home"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvf&oid=00D36000000jB0z&lastMod=1467952727000" alt=""/></a></li>
+                <li class="active"><a href="https://na30.salesforce.com/apex/SBQuestionBank">Question Bank</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBCreateSurvey">Create Survey</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBSendSurvey">Send Survey</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBREPORT">Report</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+
+<section class="page-name">
+    <div class="container clear">
+        <h2>Add Questions :</h2>
+    </div>
+</section>
+
+<section class="bodyContainer">
+    <div class="container clear">
+        <div class="white-box">
+       
+        <apex:form styleClass="mainForm">
+          
+            <div class="formFeildreport formFeild">
+            <div class="feild formFeild">
+            
+            <apex:selectList value="{!pickval}" multiselect="false" size="1" id="PickVal" styleClass="Picklist"><br />
+                <apex:actionSupport event="onchange" action="{!pickvalselect}"/>   
+            <apex:selectOptions value="{!SelectedOptions}"/>
+            </apex:selectList><br /><br />
+            </div>                 
+             
+            
+             
+  <apex:pageBlock rendered="{!Radio}">
+      <div class="radio-outer">
+          <div class="formFeildreport margin-topbott-10">
+              <label>Enter your question here </label>
+                 <div class="feild">
+                     <apex:inputTextarea value="{!questiontaken}" styleClass="Inputter1"/>
+                 </div>
+          </div>
+                 <div class="formFeildreport margin-topbott-10">
+                    <label>Option One</label>
+                  <div class="feild">
+                        <apex:inputText value="{!OptionOneGet}" styleClass="option"/>
+                    </div>
+                </div>
+                <div class="formFeildreport margin-topbott-10">
+                    <label>Option Two</label>
+                  <div class="feild">
+                        <apex:inputText value="{!OptionTwoGet}" styleClass="option"/>
+                    </div>
+                </div>
+                <div class="formFeildreport margin-topbott-10">
+                    <label>Option Three</label>
+                  <div class="feild">
+                      <apex:inputText value="{!OptionThreeGet}" styleClass="option"/>
+                    </div>
+                </div>
+                <div class="formFeildreport margin-topbott-10">
+                    <label>Option Four</label>
+                  <div class="feild">
+                       <apex:inputText value="{!OptionFourGet}" styleClass="option"/>
+                    </div>
+                </div>
+                <div class="formFeildreport margin-topbott-10">
+                    <label>Option Five</label>
+                  <div class="feild">
+                      <apex:inputText value="{!OptionFiveGet}" styleClass="option"/>
+                   </div>
+               </div>
+              <div class="formFeildreport margin-topbott-10">
+                  <label>&nbsp;</label>
+                  <div class="feild">
+                          <apex:commandButton value="Save" action="{!doInsert}" styleClass="green-btn" style="margin-left: 35%;" oncomplete="myFunction();"/>              
+                  </div>
+              </div>
+         </div>
+      </apex:pageBlock>
+
+      <apex:pageBlock rendered="{!Slider}">  
+          <div class="slider-outer">
+              <div class="formFeildreport margin-topbott-10">
+                  <label>Enter your question here</label>
+                      <div class="feild">
+                          <apex:inputTextarea value="{!questiontaken}" styleClass="option"/><br />
+                              <div class="dataSlider">
+                                  <input type="text" data-slider="true" value="0" data-slider-highlight="true" id="dataSlider"/>
+                              </div>
+                              <div class="formFeildreport margin-topbott-10">
+                                  <div class="feild">
+                                      <apex:commandButton value="Save" action="{!doInsertSlider}" styleClass="green-btn" style="margin-left: 57%;" oncomplete="myFunction();"/>              
+                                  </div>
+                             </div>
+                       </div>
+                  </div>
+                  
+                   
+              </div>
+      </apex:pageBlock>
+       
+        <apex:pageBlock rendered="{!FS}">
+            <div class="freetext-outer">
+                <div class="formFeildreport margin-topbott-10">
+                    <label>Enter your question here</label>
+                      <div class="feild">
+                          <apex:inputTextarea value="{!questiontakenFS}" />
+                      </div>
+                     
+                 </div>
+                   <div class="formFeildreport margin-topbott-10">
+                      <label>&nbsp;</label>
+                      <div class="feild">
+                         
+                         <apex:commandButton value="Save" action="{!doInsertFS}" styleClass="green-btn" style="margin-left: 35%;" oncomplete="myFunction();" />              
+                      </div>
+                 </div>
+                        
+                             
+           </div>
+       </apex:pageBlock>
+   
+        
+        <div class="formFeild">
+              
+               <div class="feild">
+                <apex:commandButton value="Finish" action="{!CancelAction}" styleClass="red-btn" style="margin-left: 97% !important;"/>   
+            </div>
+        </div>
+        
+        </div> 
+      </apex:form>
+   </div>     
+   </div>     
+  </section>
+  
+<footer class="main-footer" style="margin-top: 38px;">
+    <ul>
+        <li> <a href="#">Privacy Policy</a> </li>
+        <li><a href="#">Terms of Services</a></li>
+    </ul>
+    <div class="copyright">© 2016 Survey Builder, All rights reserved. </div>
+</footer> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   
+</body>
+</html>
+
+</apex:page>

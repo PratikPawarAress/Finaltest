@@ -1,0 +1,13 @@
+<apex:page contentType="text/plain" showHeader="false">
+Allow: /?*un=*&amp;pw=*
+Allow: /?*pw=*&amp;un=*
+Allow: /secur/frontdoor.jsp?*sid=*
+Allow: /secur/contentDoor?*sid=*
+Allow: /secur/myDomainDoor?*sid=*
+Allow: /secur/LoginInterstitial.apexp
+Allow: /secur/login_portal.jsp?*pw=*
+Allow: /sserv/login.jsp?*pw=*
+Allow: /login.jsp?*pw=*
+Allow: /login/login.jsp?*pw=*
+Allow: /secur/login_page.jsp?*pw=*
+</apex:page>

@@ -1,0 +1,162 @@
+<apex:page showHeader="false" docType="HTML-5.0"  sidebar="false" standardStylesheets="false" controller="SurveyBuilder.questionBank">   
+    <html>
+        <head>
+         <script type="text/javascript">
+setTimeout(function() {
+    $('#test').fadeOut('fast');
+}, 2000);
+</script>
+         
+            
+             <script>
+            
+            function clickToDelete(id) {
+               $.confirm({
+                            'title'     : 'Confirm before continue',
+                            'message'   : 'Are you sure you want to delete' ,
+                            'buttons'   : {
+                                'Yes'   : {
+                                    'class' : 'blue',
+                                    'action': function(){
+                                       deleteQuestion(id);
+                                        return true;
+									 }
+                                 },
+                                'No'    : {
+                                    'class' : 'gray',
+                                    'action': function(){
+                                    return false;
+                                    }  // Nothing to do in this case. You can as well omit the action property.
+                                }
+                            }
+                        });
+                 
+             return false;
+            }
+            </script>
+            <title>Manage Questions</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+            <!-- for jquery alert box -->
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jqueryConfirmstyles, 'jqueryConfirmstyles/jqueryConfirmstyles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jQueryConfirmCss, 'jquery.confirm/jquery.confirm.css')}"/>
+            <!-- for jquery alert box -->
+            
+        </head>
+        <body class="manage-questions-page">
+			<div class="page-wrap">           
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            <c:topPageNavigation myPageTitle="Manage Questions" />  
+            <section class="bodyContainer"> 
+                <div class="container clear">                    
+                    <apex:form styleClass="searchForm" id="searchForm"> 
+                        <div class="white-box">
+                            <div class="sectionTitle">Manage Survey Questions</div> 
+                            
+                            <div class="form-box-outer">
+                                <apex:outputPanel styleClass="clear top-btn-section">
+                                    <apex:actionFunction name="deleteQuestion" action="{!deleteQuestionController}" rerender="questionList">
+                                        <apex:param id="aname" name="questionId" value="" assignTo="{!questionId}"  />
+                                    </apex:actionFunction>
+                                    
+                                    <div Class="formFeild1 question-search-box"> 
+                                        <div class="feild">
+                                            <apex:outputPanel styleClass="requiredInput clear top-btn-section" layout="block">
+                                                <apex:inputText html-placeholder="Question" value="{!searchFilter}" styleClass="optionText question-field" />
+                                                <span class="filter-reload-btn-outer">
+                                                    <apex:commandButton value="Filter" action="{! search }" styleClass="green-btn filter-btn" reRender="opPnlRerender" />
+                                                    <apex:commandButton value="Reset" action="{! Reload }" styleClass="green-btn fitlerLeftSpace reload-btn" reRender="opPnlRerender"/>
+                                                </span>
+                                                
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                    <div class="floatRight clear addnew-btn-outer">
+                                        <apex:commandButton value=" Create New" action="{! createQuestion }"  styleClass="green-btn addnew-btn" style="font-weight: bold;" />
+                                </div>
+                                    <div class="clear" id="test">
+                                        <apex:pageMessages />
+                                    </div>
+                              <!--  <div class="clear">
+                                    <p class="txt-red">Note: Questions marked in red have no options assigned.</p>
+                                </div> -->
+                            </apex:outputPanel>
+                            <apex:outputPanel id="questionList" layout="block">
+                                <apex:outputPanel id="opPnlRerender">
+                                    <apex:dataTable rendered="{! hasNoQuestions == false }" value="{!questions}" id="qst" var="qst" styleClass="defaultTable no-padding">
+                                       <!-- <apex:column value="{!qst.question.SurveyBuilder__Question__c}" 
+                                                     styleClass="{!IF((qst.optionCount == 0) && (qst.question.typeOfQuestion__c != 'free_text'),'txt-red','')}"
+                                                     headerValue="Question"/> -->
+                                        <apex:column value="{!qst.question.SurveyBuilder__Question__c}"   headerValue="Question" />
+                                        
+                        
+                                        
+                                        <apex:column styleClass=""> <!-- headerValue="Action" -->
+                                            <div class="action-links">
+                                                
+                                            
+                                            <apex:outputPanel rendered="{!IF(qst.question.SurveyBuilder__typeOfQuestion__c != 'free_text' && qst.question.SurveyBuilder__typeOfQuestion__c != 'slider' ,true,false)}">
+                                               <apex:outputPanel rendered="{!qst.optionCount == 0}" >
+                                                    <div class="tooltip ">
+                                                        <apex:image rendered="{!qst.optionCount == 0}" url="{! $Resource.optionError}" />
+                                                        <span class="tooltiptext">No options assigned</span>
+                                                    </div>
+                                                </apex:outputPanel> 
+                                                <div class="tooltip">
+                                                    <apex:outputLink value="/apex/editOptions?id={!qst.question.Id}" >
+                                                          <apex:image url="{!$Resource.SurveyBuilder__manageOptions}"/>
+                                                    </apex:outputLink>
+                                                     <span class="tooltiptext">Manage Options</span>
+                                                </div>
+                                            </apex:outputPanel>
+                                            
+                                            <div class="tooltip"> 
+                                                <apex:outputLink value="{!$Page.SurveyBuilder__editQuestion}">
+                                                    <apex:image url="{!$Resource.SurveyBuilder__builder_editIcon}"/> 
+                                                    <apex:param name="id" value="{!qst.question.Id}"/>
+                                                    
+                                                </apex:outputLink> 
+                                                <span class="tooltiptext">Edit</span>
+                                            </div>
+                                            <div class="tooltip">
+                                                <!-- rerender="opPnlRerender" -->
+                                                <!--<apex:outputLink value="/apex/manageQuestions?questionId={!qst.question.Id}" onClick="return returnConfirm(this,'Are you sure to delete question?');" >
+                                                    <apex:image url="{!$Resource.builder_deleteIcon}"/>
+                                                </apex:outputLink>-->
+                                                <apex:commandLink onClick="return clickToDelete('{!qst.question.Id}')">
+                                                    <apex:image url="{!URLFOR($Resource.builder_deleteIcon) }"/>
+                                                </apex:commandLink>
+                                                <span class="tooltiptext">Remove</span>
+                                                <!-- returnConfirm for jquery alert box -->
+                                            </div>
+                                            </div>
+                                        </apex:column>
+                                    </apex:dataTable>
+                                    
+                                     <apex:outputText rendered="{! hasNoQuestions == true}">
+                                        <div class="clear noRecords">
+                                            There are no questions to display.
+                                        </div>
+                                    </apex:outputText> 
+                                    <c:globalPageIniation pagingObject="{!con}" />
+                                </apex:outputPanel>
+                                
+                            </apex:outputPanel>
+                               
+                            </div>
+                           
+
+                        </div> 
+                    </apex:form>  
+                </div> 
+            </section>  
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" />
+            
+            <!-- for jquery alert box -->
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmJs}"/>
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmscript}"/> 
+            <!-- for jquery alert box -->
+            
+        </body>
+    </html>
+</apex:page>

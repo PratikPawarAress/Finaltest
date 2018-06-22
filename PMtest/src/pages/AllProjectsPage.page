@@ -1,0 +1,105 @@
+<apex:page standardController="Allocation__c" extensions="ProjectPageController" showHeader="false">
+    <apex:form >
+        <apex:slds />
+        <style>
+            .tooltip {
+            position: relative;
+             display: block;
+             
+            }
+            
+            .tooltip .tooltiptext {
+             visibility: hidden;
+             width: 150px;
+             background-color:#DCDCDC;
+             color: black;
+             /*text-align: center;
+             border-radius: 6px;
+             padding: 5px 0;
+                    
+             /* Position the tooltip */
+             position: absolute;
+             z-index: 1;
+             bottom: 100%; 
+             left: 70%;
+             margin-left: -60px;*/
+                 text-align: center;
+    border-radius: 6px;
+    padding: 2px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 100%;
+    margin-left: -100px;
+            }
+            
+            .tooltip:hover .tooltiptext {
+            visibility: visible;
+            }
+            .secHeader{
+            background-color: #DCDCDC;
+            }
+            .secSubHeader{
+            background-color: #d4e6f1;
+            Height:30px;
+            Width:100%;
+            text-align: left;
+            padding: 5px;
+            }
+            .label{
+            font-size: 15px;
+            font-weight: bold;
+            
+            }
+        </style>
+        
+        <div class="secHeader">
+            <apex:sectionHeader title="Hello {!employeeName}, check your allocations"/> 
+        </div>
+        <div>
+            <apex:pageBlock title="Following Projects/CRs has been assigned to you !" id="projects">
+                <div class="secSubHeader">
+                    <apex:outputLabel styleClass="label">Projects</apex:outputLabel> 
+                </div>
+                <apex:pageBlockSection columns="1">
+                    <apex:pageBlockTable value="{!listOfProjects}" var="p" rendered="true">
+                        <apex:column headerValue="Project Name" >
+                            <div Class="tooltip">
+                            <span class="tooltiptext">Click to add Timesheets</span>
+                            <apex:outputLink value="/apex/TimeSheetPage?AllocationId={!p.Id}&employeeid={!p.Employee__r.Employee_ID__c}&ProjectId={!p.Project__r.Id}">{!p.Project__r.Project_Name__c}
+                            </apex:outputLink>
+                            </div>
+                        </apex:column>
+                       <!-- <apex:column value="{!p.Project__r.Project_Name__c}" /> -->
+                        <apex:column value="{!p.Project__r.Project_Manager__c}"/>            
+                        <apex:column value="{!p.Allocation_Start_Date__c}"/>
+                        <apex:column value="{!p.Allocation_End_Date__c}"/>
+                        <apex:column value="{!p.Project__r.Stage__c}"/>
+                        <apex:column value="{!p.Allocated_Effort_Hrs__c}"/>
+                        <apex:column value="{!p.Project__r.Phase__c}"/>
+                        <apex:column value="{!p.Remarks__c}"/>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+                
+                <div class="secSubHeader">
+                    <apex:outputLabel styleClass="label">Change Requests</apex:outputLabel> 
+                </div>
+                <apex:pageBlockSection columns="1">   
+                    <apex:pageBlockTable value="{!listOfCR}" var="cr" rendered="true">
+                        <apex:column headerValue="CR Name" styleClass="tooltip">
+                            <span class="tooltiptext">Click to add Timesheets</span>
+                            <apex:outputLink value="/apex/TimeSheetPage?AllocationId={!cr.Id}&employeeid={!cr.Employee__r.Employee_ID__c}&CRId={!cr.Change_RequestL__r.Id}">{!cr.Change_RequestL__r.Name}
+                            </apex:outputLink>
+                        </apex:column>  
+                        <apex:column value="{!cr.Change_RequestL__r.Project__r.Name}" />
+                        <apex:column value="{!cr.Project__r.Project_Manager__c}"/>            
+                        <apex:column value="{!cr.Allocation_Start_Date__c}"/>
+                        <apex:column value="{!cr.Allocation_End_Date__c}"/>  
+                        <apex:column headerValue="Stage" value="{!cr.Change_RequestL__r.Stage__c}"/>
+                        <apex:column value="{!cr.Change_RequestL__r.Change_Details__c}" style="white-space: pre;white-space:pre-wrap;word-wrap: break-word;" />
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </apex:pageBlock> 
+        </div>    
+    </apex:form>
+</apex:page>

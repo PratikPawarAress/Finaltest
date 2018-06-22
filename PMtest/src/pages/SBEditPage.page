@@ -1,0 +1,102 @@
+<apex:page controller="DispQuestRepController" showHeader="false" sidebar="false">
+<html>
+<head>
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Question Bank</title>
+<apex:stylesheet value="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900"/>
+<apex:stylesheet value="{!$Resource.SurveyMaster}"/>
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/ >
+<!--<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900" rel="stylesheet" type="text/css">
+<link href="assets/css/master.css" rel="stylesheet">-->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<style>
+.lookupIcon {
+ background-image: url('https://c.na30.content.force.com/servlet/servlet.FileDownload?file=01536000001JUKE') !important;
+ height:30px !important;
+ width:30px !important;
+ position:absolute !important;
+ top:6px !important;
+ right:-25px !important;
+}
+
+.lookupIconOn {
+ background-image: url('https://c.na30.content.force.com/servlet/servlet.FileDownload?file=01536000001JUKE') !important;
+ height:30px !important;
+ width:30px !important;
+ position:absolute !important;
+ top:6px !important;
+ right:-25px !important;
+}
+</style>
+</head>
+<body>
+<header class="mainHeader">
+    <div class="container clear">
+        <a href="https://na30.salesforce.com/apex/SBIndex" class="logo"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvk&oid=00D36000000jB0z&lastMod=1467952746000" alt=""/></a>
+        <div class="nav">
+            <ul>
+                <li><a href="https://na30.salesforce.com/apex/SBIndex" class="home"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvf&oid=00D36000000jB0z&lastMod=1467952727000" alt=""/></a></li>
+                <li class="active"><a href="https://na30.salesforce.com/apex/SBQuestionBank">Question Bank</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBCreateSurvey">Create Survey</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBSendSurvey">Send Survey</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBREPORT">Report</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<section class="page-name">
+    <div class="container clear">
+        <h2>Edit Question Repository</h2>
+    </div>
+</section>
+
+<section class="bodyContainer">
+    <div class="container clear">
+        <div class="white-box">
+        <h1 class="welcomeTxt" style="margin-left:37%;">Edit Question Repository</h1>
+        <apex:form styleClass="mainForm" style="margin-top:50px !important;">
+           <apex:repeat value="{!recdata}" var="a">
+            <div class="formFeild">
+                    <label>Repository Name:</label>
+                    <div class="feild">
+                        <apex:inputField value="{!a.Repository_Name__c}" styleClass="Inputter1" label="Repository Name"/>
+                    </div>
+             </div>
+             
+              <div class="formFeild">
+                    <label>Repository Description:</label>
+                    <div class="feild">
+                        <apex:inputField value="{!a.Description__c}" styleClass="Inputter1" label="Respository Description"/>
+                    </div>
+             </div>
+               </apex:repeat>
+            <div class="feild buttons" style="margin-left:37%;">
+            <apex:commandButton value="Save" action="{!save}" styleClass="green-btn" />
+            <apex:commandButton value="Cancel" action="{!cancel}" styleClass="red-btn" />
+            </div>
+        </apex:form>
+        </div>
+    </div>
+</section>
+
+<footer class="main-footer" style="margin-top: 39px;">
+    <ul>
+        <li> <a href="#">Privacy Policy</a> </li>
+        <li><a href="#">Terms of Services</a></li>
+    </ul>
+    <div class="copyright">© 2016 Survey Builder, All rights reserved. </div>
+</footer> 
+
+</body>
+</html>
+</apex:page>

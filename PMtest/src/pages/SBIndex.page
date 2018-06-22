@@ -1,0 +1,88 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+<apex:form >  
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Survey Builder</title>
+<apex:stylesheet value="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900"/>
+<apex:stylesheet value="{!$Resource.SurveyMaster}"/>
+
+<!--<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900" rel="stylesheet" type="text/css">
+<link href="assets/css/master.css" rel="stylesheet">-->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script>
+                                                                     /* When the user clicks on the button,
+                                                                        toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+                                                                    // Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+</script>
+
+</head>
+<body>
+<header class="mainHeader">
+    <div class="container clear">
+        <a href="#" class="logo"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvk&oid=00D36000000jB0z&lastMod=1467952746000" alt=""/></a>
+        <a href="https://c.na30.visual.force.com" class="backORG">Back to ORG</a>
+    </div>
+</header>
+<section class="bodyContainer">
+    <div class="container clear">
+        <h1 class="welcomeTxt">Welcome to Survey Builder <span>Create your survey in minutes!</span></h1>
+        <div class="home-mainNav">
+            <a href="https://na30.salesforce.com/apex/SBQuestionBank" class="mainNav-box qb">
+                <i><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvu&oid=00D36000000jB0z&lastMod=1467952786000" alt=""/></i>
+                <div class="nav-txt">Question <span>Bank</span></div>
+            </a>
+            <a href="https://na30.salesforce.com/apex/SBCreateSurvey" class="mainNav-box cs">
+                <i><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvV&oid=00D36000000jB0z&lastMod=1467952687000" alt=""/></i>
+                <div class="nav-txt">Create <span>Survey</span></div>
+            </a>
+            <a href="https://na30.salesforce.com/apex/SBSendSurvey" class="mainNav-box ss">
+                <i><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPw4&oid=00D36000000jB0z&lastMod=1467952833000" alt=""/></i>
+                <div class="nav-txt">Send <span>Survey</span></div>
+            </a>
+            <a href="https://na30.salesforce.com/apex/SBREPORT" class="mainNav-box r">
+                <i><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvz&oid=00D36000000jB0z&lastMod=1467952811000" alt=""/></i>
+                <div class="nav-txt">Report</div>
+            </a>
+      </div>
+    </div>
+</section>
+
+<footer class="main-footer" style="margin-top:97px;">
+    <ul>
+        <li> <a href="#">Privacy Policy</a> </li>
+        <li><a href="#">Terms of Services</a></li>
+    </ul>
+    <div class="copyright">© 2016 Survey Builder, All rights reserved. </div>
+</footer> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</body> 
+</html>
+</apex:form>
+</apex:page>

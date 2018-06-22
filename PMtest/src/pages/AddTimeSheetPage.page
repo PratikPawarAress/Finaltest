@@ -1,0 +1,45 @@
+<apex:page standardController="TimeSheet__c" extensions="AddTimeSheetPageController" showHeader="false">
+    <apex:form >
+        <apex:slds />  
+        <style>
+            .secHeader{
+                    background-color: #DCDCDC;
+                }
+    
+        </style> 
+         <div class="secHeader">
+            <apex:sectionHeader title="Add TimeSheet for {!projectName2} : {!CRName1}"/>
+        </div>    
+        <div>        
+            <apex:pageBlock id="Addsheet">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Save" action="{!save}" />
+                    <apex:commandButton value="Cancel" action="{!cancel}" />
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Task Category"/>
+                        <apex:inputField value="{!TimeSheet__c.Task_Category__c}" />
+                    </apex:pageBlockSectionItem> 
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Task Description"/>
+                        <apex:inputField value="{!TimeSheet__c.Task_Description__c}"/> 
+                    </apex:pageBlockSectionItem>   
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Date"/>
+                        <apex:inputField value="{!TimeSheet__c.Date__c}"/> 
+                    </apex:pageBlockSectionItem>         
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Hours Spent"/>
+                        <apex:inputField value="{!TimeSheet__c.Hours_Spent__c}"/> 
+                    </apex:pageBlockSectionItem>       
+                   <!--- <apex:pageBlockSectionItem >
+                        <apex:outputText value="Status  "/>
+                        <apex:inputField value="{!TimeSheet__c.Status__c}"/> 
+                    </apex:pageBlockSectionItem> --> 
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+         </div>
+    </apex:form>
+</apex:page>

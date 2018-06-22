@@ -1,0 +1,492 @@
+<apex:page controller="SurveyBuilder.EmailListing" docType="HTML-5.0" showHeader="false" sidebar="false" standardStylesheets="false"
+           applyHtmlTag="false"  applyBodyTag="false" >    
+   <apex:variable id="leafThreshold" var="isLeadThresholdCrossed" value="false" />
+   <apex:variable id="contactThreshold" var="isContactThresholdCrossed" value="false" />
+
+    <html> 
+        <head>
+            <style>
+            .infoMessage {
+                background:#ffc;
+                background-color: #ffc;
+                
+    border-style: solid;
+    border-width: 1px;
+    color: Red;
+    padding: 6px 8px 6px 6px;
+                margin: 8px;
+                }
+            </style>
+            <script>
+            
+            var flag ='{!JSENCODE(HTMLENCODE($CurrentPage.parameters.idToDelete))}';
+            var currentTab = 'Leads';
+            
+            if(flag != "") 
+            {
+                currentTab  = 'CustomEmail';
+                makeActivTab(currentTab) ;
+            }
+            </script>  
+            <script>
+            function clickToDelete(idToDelete,surveyId) {
+                console.log('inside  ');
+                $.confirm({
+                    'title'     : 'Confirm before continue',
+                    'message'   : 'Are you sure you want to delete' ,
+                    'buttons'   : {
+                        'Yes'   : {
+                            'class' : 'blue',
+                            'action': function(){
+                                console.log('inside inside ');
+                                deleteTemplate(idToDelete,surveyId);
+                                setTimeout(function() { location.reload(); }, 2000);
+                            }
+                        },
+                        'No'    : {
+                            'class' : 'gray',
+                            'action': function(){
+                                return false;
+                            }  // Nothing to do in this case. You can as well omit the action property.
+                        }
+                    }
+                });
+                
+                return false;
+            }
+            </script>
+            <script>
+            
+            window.onload = function() 
+            {
+                var clickedTab ='{!currentTab}';
+                var srsId=document.getElementById('toggleLead');
+
+                if(clickedTab == "ContactTab") 
+                {
+                    srsId=document.getElementById('toggleContact');
+                    currentTab = 'Contacts'; 
+                    console.log('contact clicked');
+                }
+                if(clickedTab == "LeadTab") 
+                {
+                   srsId =document.getElementById('toggleLead');
+                    currentTab = 'Leads'; 
+                    console.log('Lead clicked');
+
+                }
+                /*
+                var checkboxes;
+                var flag=false;
+                if(srsId.includes('toggleLead'))
+                {
+                    checkboxes = document.querySelectorAll('#ldIdDiv input[type="checkbox"]');
+                }else{
+                    checkboxes = document.querySelectorAll('#CntIdDiv input[type="checkbox"]');
+                }
+                
+                for (var i = 0; i < checkboxes.length; i++) 
+                {
+                    if ((checkboxes[i].ID != srsId) && (!checkboxes[i].checked)){
+                        flag=false;
+                    	break;
+                        }else{
+                             flag=true;
+                            }
+                    
+                    
+                }
+                if(flag){
+                    
+                    srsId.value(true);
+                    
+                }*/
+                
+                
+                
+                                    console.log('Lead clickeds'+currentTab);
+
+                document.getElementById('tab'+currentTab  +'Id').focus();
+                document.getElementById(currentTab).style.display = "block";
+                clickTab(currentTab);
+                
+                
+            };
+            
+            function toggle(source) 
+            {
+                var sourceId = source.id;
+                var checkboxes;
+                console.log('sourceId.contains() '+sourceId.includes('toggleLead'));
+                if(sourceId.includes('toggleLead'))
+                {
+                    checkboxes = document.querySelectorAll('#ldIdDiv input[type="checkbox"]');
+                }else{
+                    checkboxes = document.querySelectorAll('#CntIdDiv input[type="checkbox"]');
+                }
+                
+                for (var i = 0; i < checkboxes.length; i++) 
+                {
+                    if (checkboxes[i] != source)
+                        checkboxes[i].checked = source.checked;
+                }
+            }
+            
+            function clickTab(cityName) 
+            {
+                console.log('tabclicked');
+                //clearPageMessages();
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) 
+                {
+                    tabcontent[i].style.display = "none";
+                }
+                makeActivTab(cityName);
+            }
+            
+            
+            function makeActivTab(cityName) {
+                var i, tabcontent, tablinks; 
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) 
+                {
+                    tablinks[i].className = tablinks[i].className.replace(" recipient-tabs active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                //evt.currentTarget.className += " recipient-tabs active";
+                document.getElementById('tab'+cityName  +'Id').className += " recipient-tabs active";
+                /*if(cityName=="Contacts"){
+                    alert('There are more than 2000 records in Contact, Please search by Name or Email-ID if record dose not appear in list.');
+                    //showPageMessage('There are more than 2000 records in Contact, Please search by Name or Email-ID if record dose not appear in list.');
+                    
+                    }
+                if(cityName=="Leads"){
+                    //showPageMessage('There are more than 2000 records in Lead, Please search by Name or Email-ID if record dose not appear in list.');
+                     alert('There are more than 2000 records in Lead, Please search by Name or Email-ID if record dose not appear in list.');
+                    }*/
+                var clickedTab ='{!currentTab}';
+                var srsId=document.getElementsByClassName("toggleLead");
+
+                if(clickedTab == "ContactTab") 
+                {
+                    srsId=document.getElementsByClassName("toggleContact");
+                    currentTab = 'Contacts'; 
+                    console.log('contact clicked');
+                }
+                if(clickedTab == "LeadTab") 
+                {
+                   srsId =document.getElementsByClassName("toggleLead");
+                    currentTab = 'Leads'; 
+                    console.log('Lead clicked');
+
+                }
+                
+                var checkboxes;
+                var flag=false;
+                if(clickedTab == "LeadTab")
+                {
+                    checkboxes = document.querySelectorAll('#ldIdDiv input[type="checkbox"]');
+                }else{
+                    checkboxes = document.querySelectorAll('#CntIdDiv input[type="checkbox"]');
+                }
+                var sourceChkox;
+                for (var i = 0; i < checkboxes.length; i++) 
+                {
+                    
+                    if(i==0) sourceChkox = checkboxes[0];
+                    console.log('checkbox id'+checkboxes[i].ID+' ---- checkbox Value'+checkboxes[i].checked)
+                    if ((i>0) && (!checkboxes[i].checked)){
+                        flag=false;
+                        break;
+                    }else{
+                        flag=true;
+                    }
+                    
+                    
+                }
+                
+                if(flag){
+                    sourceChkox.checked =true ;
+                    // srsId.value(true);
+                    
+                    }
+            }
+            </script>
+            
+            <title>Recipients</title> 
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+            <!-- for jquery alert box -->
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jqueryConfirmstyles, 'jqueryConfirmstyles/jqueryConfirmstyles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jQueryConfirmCss, 'jquery.confirm/jquery.confirm.css')}"/>
+            <!-- for jquery alert box -->  
+        </head>
+        <body class="recipients-body">
+            
+            <div class="page-wrap">
+                
+                <apex:include pageName="SurveyBuilder__surveyHeader" />
+                <c:topPageNavigation myPageTitle="Select Recipient" /> 
+                <section class="bodyContainer">
+                    <div class="container clear">
+                        <apex:form styleClass="searchForm" onsubmit="$('[id$=toggleLead]').val(false)">
+                            <div class="white-box">
+                                <apex:actionFunction name="clearPageMessages" action="{!clearPageMessages}">
+                                    
+                                </apex:actionFunction>
+                                <apex:actionFunction name="deleteTemplate" action="{!deleteCustomEmailInit}" rerender="custEmail">
+                                    <apex:param id="aname" name="idToDelete" value="" assignTo="{!idToDelete}"  />
+                                    <apex:param id="aname1" name="surveyId" value="" assignTo="{!surveyId}"  />    
+                                </apex:actionFunction>
+                                <div class="clear top-btn-outer">
+                                    <apex:outputLink value="{!$Page.SurveyBuilder__surveyList}"  styleClass="green-btn default-btn" style="font-weight: bold;">
+                                        Go to Manage Survey
+                                    </apex:outputLink>
+                                    <apex:outputLink value="{! $page.previewSurvey }" styleClass="green-btn default-btn  fitlerLeftSpace">
+                                        View Preview
+                                        <apex:param name="surveyId" value="{! surveyId }" />
+                                    </apex:outputLink>
+                                </div>
+                                
+                                <!---Add Recipients to Survey--->
+                                
+                                
+                                
+                                <c:surveyTabs surveyId="{!surveyId}" />
+                                <div class="form-box-outer clear">
+                                    <apex:outputText >                                         
+                                        <div class="sectionTitle"> Add Recipients to Survey</div>                                        
+                                    </apex:outputText> 
+                                    
+                                    <div class="form-box-inner clear">
+                                        
+                                        <ul class="tab recipient-tabs">
+                                            <li><a href="javascript:void(0)" Id="tabLeadsId" class="tablinks" onclick="clickTab('Leads')">Leads</a></li>
+                                            <li><a href="javascript:void(0)" Id="tabContactsId" class="tablinks" onclick="clickTab('Contacts')">Contacts</a></li>
+                                            <li><a href="javascript:void(0)" Id="tabCustomEmailId" class="tablinks" onclick="clickTab('CustomEmail')">Custom Email</a></li>
+                                        </ul>  
+                                        
+                                        <div id="Leads" class="tabcontent">
+                                            <apex:pageBlock mode="maindetail">
+                                                <div class="search-block">
+                                                    <div style="display: inline-table">
+                                                        <span>Name:</span>
+                                                        <apex:inputText value="{!lSearchName}" />
+                                                    </div>
+                                                    <div style="display: inline-table">
+                                                        <span>Email Address:</span>
+                                                        <apex:inputText value="{!lSearchEmail}" />
+                                                    </div>
+                                                    <apex:commandButton styleClass="search-block-button" value="Search" action="{!leadSearch}" rerender="TablePanel"
+                                                                        status="TableUpdateStatus" />
+                                                </div>
+                                                
+                                                <!-- <div class="process-block">
+<apex:actionStatus id="ProcessButtonStatus">
+<apex:facet name="stop">
+<apex:outputPanel >
+<apex:commandButton styleClass="process-block-button" value="Process Selected" action="{!DoSomethingMany}"
+status="ProcessButtonStatus" rerender="nothing" />
+<apex:commandButton styleClass="process-block-button" value="Clear All" action="{!ClearAll}"
+rerender="TheForm,TablePanel" />
+</apex:outputPanel>
+</apex:facet>
+<apex:facet name="start">
+<apex:outputPanel >
+<apex:commandButton styleClass="process-block-button" value="Processing..." disabled="true" />
+<apex:commandButton styleClass="process-block-button" value="Processing..." disabled="true" />
+</apex:outputPanel>
+</apex:facet>
+</apex:actionStatus>
+</div>-->
+                                            </apex:pageBlock>
+                                            <apex:pageBlock title=" " >
+                                                <apex:OutputPanel layout="block" id="commonRerenderLeads">
+                                                    <!--<apex:outputLabel id="outputMsg" styleClass="success"><span class="outputMsgCss"> {!outputMsg } </span></apex:outputLabel>-->
+                                                    <apex:pageMessages id="showLeadMsg"></apex:pageMessages>
+                                                    
+                                                     <apex:outputText rendered="{!totalLead}" styleClass="infoMessage" value="Warning : There are more than 2000 records in Leads, Please search by Name or Email-ID if record dose not appear in list.
+" />
+                                                    <apex:OutputPanel layout="block" styleclass="inner-table">
+                                                        <div class="table-responsive" id="ldIdDiv">
+                                                            
+                                                            <apex:pageBlockTable value="{!currentLeadList}" var="l" id="tblLead" styleClass="defaultTable" >                                                
+                                                                <apex:column styleClass="Outputter3" rendered="{!isHideButton}">
+                                                                    <apex:facet name="header">
+                                                                        <apex:inputCheckbox onclick="toggle(this);" Id="toggleLead" styleClass="toggleLead"  />
+                                                                    </apex:facet>
+                                                                    <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                                        <!--<apex:outputPanel styleClass="requiredBlock" layout="block"/> -->
+                                                                        <apex:inputCheckbox id="inputId" required="true" value="{!l.selected}" />
+                                                                    </apex:outputPanel>
+                                                                </apex:column>
+                                                                <apex:column headerValue="Name" colspan="2"  styleClass="Outputter3">
+                                                                    <apex:outputField value="{!l.led.Name}"/>
+                                                                </apex:column>
+                                                                <apex:column headerValue="Email" colspan="2"  styleClass="Outputter3">
+                                                                    <apex:outputField value="{!l.led.Email}" />
+                                                                </apex:column>
+                                                            </apex:pageBlockTable>
+                                                            
+                                                        </div>
+                                                    </apex:OutputPanel>
+                                                    
+                                                    
+                                                </apex:OutputPanel>
+                                                <apex:pageBlockButtons > 
+                                                    <apex:commandButton value="First" action="{!beginning}" disabled="{!DisablePrevious}"/>
+                                                    <apex:commandButton value="Prev" action="{!previous}" disabled="{!DisablePrevious}"/>
+                                                    <apex:outputText value="{!counter+1}" /> to&nbsp; <apex:outputText value="{!counter+limitSize}" /> of &nbsp;
+                                                    <apex:outputText value="{!totalSize}" />
+                                                    <apex:commandButton value="Next" action="{!next}" id="nxt" disabled="{!DisableNext}"/>
+                                                    <apex:commandButton value="Last" action="{!last}" disabled="{!DisableNext}"/>
+                                                </apex:pageBlockButtons>
+                                            </apex:pageBlock>
+                                        </div>
+                                        <div id="Contacts" class="tabcontent">
+                                            <apex:pageBlock mode="maindetail">
+                                                <div class="search-block">
+                                                    <div style="display: inline-table">
+                                                        <span>Name:</span>
+                                                        <apex:inputText value="{!cSearchName}" />
+                                                    </div>
+                                                    <div style="display: inline-table">
+                                                        <span>Email Address:</span>
+                                                        <apex:inputText value="{!cSearchEmail}" />
+                                                    </div>
+                                                    <apex:commandButton styleClass="search-block-button" value="Search" action="{!ContactSearch}" rerender="TablePanel"
+                                                                        status="TableUpdateStatus" />
+                                                </div>
+                                                
+                                                <!-- <div class="process-block">
+<apex:actionStatus id="ProcessButtonStatus">
+<apex:facet name="stop">
+<apex:outputPanel >
+<apex:commandButton styleClass="process-block-button" value="Process Selected" action="{!DoSomethingMany}"
+status="ProcessButtonStatus" rerender="nothing" />
+<apex:commandButton styleClass="process-block-button" value="Clear All" action="{!ClearAll}"
+rerender="TheForm,TablePanel" />
+</apex:outputPanel>
+</apex:facet>
+<apex:facet name="start">
+<apex:outputPanel >
+<apex:commandButton styleClass="process-block-button" value="Processing..." disabled="true" />
+<apex:commandButton styleClass="process-block-button" value="Processing..." disabled="true" />
+</apex:outputPanel>
+</apex:facet>
+</apex:actionStatus>
+</div>-->
+                                            </apex:pageBlock>
+                                            <apex:pageBlock title=" " >
+                                                <apex:OutputPanel layout="block" id="commonRerenderContacts">
+                                                    <!--<apex:outputLabel styleClass="success"><span class="outputMsgCss"> {!outputMsg } </span></apex:outputLabel>-->
+                                                    <apex:pageMessages id="showContactMsg"></apex:pageMessages>
+                                                    <apex:outputText styleClass="infoMessage" rendered="{!totalContact}" value="Warning : There are more than 2000 records in Contact, Please search by Name or Email-ID if record dose not appear in list." />
+                                                    <div class="table-responsive" id="CntIdDiv">
+                                                        
+                                                        <apex:OutputPanel layout="block" styleclass="inner-table">
+                                                            <apex:pageBlockTable value="{!currentContactList}" var="c" id="tblContact" styleClass="defaultTable">    
+                                                                <apex:column rendered="{!isHideButton}">
+                                                                    <apex:facet name="header">
+                                                                        <apex:inputCheckbox onclick="toggle(this);"  Id="toggleContact" styleClass="toggleContact" />
+                                                                    </apex:facet>
+                                                                    <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                                        <!--<apex:outputPanel styleClass="requiredBlock" layout="block"/> -->
+                                                                        <apex:inputCheckbox id="inputId" required="true"  value="{!c.selected}"/>
+                                                                    </apex:outputPanel>
+                                                                </apex:column>
+                                                                <apex:column headerValue="Contact Name" colspan="2">
+                                                                    <apex:outputField value="{!c.con.Name}"/>
+                                                                </apex:column>
+                                                                <apex:column headerValue="Contact Email" colspan="2">
+                                                                    <apex:outputField value="{!c.con.Email}"/>
+                                                                </apex:column>                                            
+                                                            </apex:pageBlockTable>
+                                                        </apex:OutputPanel>
+                                                    </div>   
+                                                </apex:OutputPanel>
+                                                <apex:pageBlockButtons > 
+                                                    <apex:commandButton value="First" action="{!beginningCon}" disabled="{!DisablePreviousCon}"/>
+                                                    <apex:commandButton value="Prev" action="{!previousCon}" disabled="{!DisablePreviousCon}"/>
+                                                    <apex:outputText value="{!counterCon+1}" /> to&nbsp; <apex:outputText value="{!counterCon+limitSizeCon}" /> of&nbsp; 
+                                                    <apex:outputText value="{!totalSizeCon}" />
+                                                    <apex:commandButton value="Next" action="{!nextCon}" disabled="{!DisableNextCon}"/>
+                                                    <apex:commandButton value="Last" action="{!lastCon}" disabled="{!DisableNextCon}"/>
+                                                </apex:pageBlockButtons>
+                                                
+                                                
+                                            </apex:pageBlock>
+                                        </div>
+                                        <div id="CustomEmail" class="tabcontent">
+                                            <apex:OutputPanel layout="block" id="commonRerenderCustom">
+                                                <!--<apex:outputLabel styleClass="success"><span class="outputMsgCss"> {!outputMsg } </span></apex:outputLabel>-->
+                                                <apex:pageMessages id="showCustomMsg"></apex:pageMessages>                        
+                                                <section class="bodyContainer no-margin-top">
+                                                    <apex:outputPanel rendered="{!isHideButton}">
+                                                        <div class="container clear">
+                                                            <div class="content-box email-styling">
+                                                                <div class="formFeild">
+                                                                    <label><span class="spanLblEmail">Enter Email</span></label>
+                                                                    <div class="feild">
+                                                                        <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                                            <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                                                                            <apex:inputText id="theFieldInput" value="{!txtCustomEmail}" html-placeholder="Enter Email Id"  styleclass="txtCustomeEmail" />
+                                                                        </apex:outputPanel>
+                                                                        <span class="spnEmailNote">Note - Enter email separated by Commas E.g. abc1@domain.com,abc2@domain.com</span>                                                                                                                                            
+                                                                    </div>                                            
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                    <div class="container clear">
+                                                        <apex:OutputPanel id="custEmail" layout="block"  styleclass="inner-table">
+                                                            <apex:pageBlock rendered="{!(lstAllCustomEmail.size > 0)}">
+                                                                <label><span class="spanLblEmail">List of applied emails</span></label>
+                                                                <apex:pageBlockTable value="{!lstAllCustomEmail}" id="tblCustomEmail"  var="cus" styleClass="defaultTable">                                                                                       
+                                                                    <apex:column headerValue="Custom Email" colspan="2">
+                                                                        <apex:outputField styleClass="text-transform: lowercase;" value="{!cus.SurveyBuilder__email__c}"/>
+                                                                    </apex:column>                                            
+                                                                    <apex:column headerValue="Delete" styleClass="Outputter3">
+                                                                        <div class="tooltip">
+                                                                            <!--<apex:outputlink value="/apex/SBRecipient?idToDelete={!cus.Id}&surveyId={!$CurrentPage.parameters.surveyId}"  onclick="return returnConfirm(this,'Are you sure to delete the Custom Email?');">
+<apex:image url="{!$Resource.builder_deleteIcon}"/>                                                
+</apex:outputlink>-->
+                                                                            <apex:commandLink onclick="return clickToDelete('{!cus.Id}','{!surveyId}')" >
+                                                                                <apex:image url="{!URLFOR($Resource.builder_deleteIcon) }"/>
+                                                                            </apex:commandLink> 
+                                                                            
+                                                                            <span class="tooltiptext">Delete Email</span>
+                                                                        </div>
+                                                                    </apex:column>
+                                                                </apex:pageBlockTable>                                        
+                                                            </apex:pageBlock>
+                                                        </apex:OutputPanel>                                
+                                                    </div>
+                                                </section>
+                                            </apex:OutputPanel>
+                                        </div>
+                                        
+                                        <div class="feild  margin-top15">                
+                                            <apex:commandButton value="Next" action="{! gotoSendSurvey }" rendered="{! isHideButton == false }" styleClass="green-btn default-btn"   />
+                                            <!--<apex:commandButton value="Add Recipient" rerender="commonRerenderLeads,commonRerenderContacts,commonRerenderCustom"  Action="{!processSelected}" rendered="{!isHideButton}" styleClass="green-btn default-btn fitlerLeftSpace" /> -->
+                                            <apex:commandButton value="Next"  Action="{!processSelected}" rendered="{!isHideButton}" styleClass="green-btn default-btn" /> 
+                                            <!--previous was reRender="showmsg" rerender="table" -->
+                                            <!--<apex:commandButton value="Cancel" Action="{!CancelAction}" styleClass="red-btn fitlerLeftSpace"/>-->
+                                        </div>
+                                    </div>    
+                                </div>     
+                            </div>
+                        </apex:form>
+                    </div>               
+                </section>
+            </div>   
+            <apex:include pageName="SurveyBuilder__surveyFooter" />                                
+            
+            <!-- for jquery alert box -->
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmJs}"/>
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmscript}"/> 
+            <!-- for jquery alert box -->
+            
+        </body>
+    </html>
+</apex:page>

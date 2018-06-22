@@ -1,0 +1,103 @@
+<apex:page controller="BenchController" docType="html-5.0">
+    <apex:pagemessages />
+    <apex:form >
+        <apex:pageBlock >
+            <apex:panelGrid columns="12" id="abcd">
+                From Date : <apex:input type="date" value="{!frmdate}"  rendered="true" required="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                To Date : <apex:input type="date" value="{!todate}"    rendered="true" required="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Filter By :           
+                <apex:selectList size="1" value="{!Resourcename}">
+                    <apex:selectOptions value="{!Resourcenames}"/>
+                    <apex:actionSupport event="onchange" action="{!selectclick1}" reRender="abcd"/>
+                </apex:selectList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                Filter By Efforts :           
+                <apex:selectList size="1" value="{!effortHour}">
+                    <apex:selectOptions value="{!effortHours}"/>
+                    <apex:actionSupport event="onchange" reRender="abcd"/>
+                </apex:selectList>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                
+                <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:100px" size="5">
+                    <apex:selectOptions value="{!unselectedvalues}" />
+                </apex:selectList>
+                <apex:panelGroup >
+                    <br/>
+                    <apex:image value="{!$Resource.multiselected}">
+                        <apex:actionSupport event="onclick" action="{!selectclick}" reRender="abcd"/>
+                    </apex:image>
+                    <br/><br/>
+                    <apex:image value="{!$Resource.multiunselected}">
+                        <apex:actionSupport event="onclick" action="{!unselectclick}" reRender="abcd"/>
+                    </apex:image>
+                </apex:panelGroup>
+                <apex:selectList id="sel2" value="{!rightselected}" multiselect="true" style="width:100px" size="5">
+                    <apex:selectOptions value="{!SelectedValues}" />
+                </apex:selectList>
+            </apex:panelGrid>
+            <apex:pageBlockButtons location="Bottom"><apex:commandButton value="Search" action="{!doSearch}" /></apex:pageBlockButtons>
+        </apex:pageBlock>
+        <apex:pageBlock id="Bill_Actual" title="Utilization Report :By Actual Efforts" rendered="{!showActualTable}">
+            <apex:pageBlockTable value="{!Allocmap}" var="nba" id="tableAllocation">
+                <apex:column >  
+                    <apex:facet name="header">Project Name</apex:facet>
+                    {!Allocmap[nba].ProjectName}
+                </apex:column>
+                <apex:column >  
+                    <apex:facet name="header">Project Type</apex:facet>
+                    {!Allocmap[nba].ProjectType}
+                </apex:column>
+                <apex:column >  
+                    <apex:facet name="header">Actual Project Hours</apex:facet>
+                    {!Allocmap[nba].ActualHours}
+                </apex:column>
+                <apex:column >  
+                    <apex:facet name="header">Allocated Project Hours</apex:facet>
+                    {!Allocmap[nba].Allocatedhours}
+                </apex:column>  
+        </apex:pageBlockTable>          
+        </apex:pageBlock>
+        <apex:pageBlock id="Bill_Allocations" title="Utilization Report :By Allocated Efforts"  rendered="{!showAllocatedTable}">
+            <apex:pageBlockTable value="{!Allocmap}" var="nba" id="tableAllocation">
+                <apex:column rendered="{!showEmpName}">    
+                    <apex:facet name="header">Employee Name</apex:facet>
+                    <apex:outputLink value="/apex/utilizationDetails?empName={!Allocmap[nba].emplName}&frmDate={!frmdate}&toDate={!todate}&rightselected={!AllString}&resourceName={!Resourcename}">    
+                        {!Allocmap[nba].emplName}
+                    </apex:outputLink>
+                </apex:column> 
+                <apex:column rendered="{!showLocation1}"> 
+                    <apex:facet name="header">Work Location</apex:facet>
+                    {!Allocmap[nba].empWorkloc}
+                </apex:column>	
+                <apex:column rendered="{!showLocation}"> 
+                    <apex:facet name="header">Work Location</apex:facet>
+                    <apex:outputLink value="/apex/utilizationDetails?WorkLoc={!Allocmap[nba].empWorkloc}&frmDate={!frmdate}&toDate={!todate}&rightselected={!AllString}&resourceName={!Resourcename}">    
+                        {!Allocmap[nba].empWorkloc}
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column rendered="{!showProject}">  
+                    <apex:facet name="header">Project Name</apex:facet>
+                    <apex:outputLink value="/apex/utilizationDetails?ProjName={!Allocmap[nba].projectName}&frmDate={!frmdate}&toDate={!todate}&rightselected={!AllString}&resourceName={!Resourcename}">    
+                        {!Allocmap[nba].projectName}
+                    </apex:outputLink>
+                </apex:column>
+               
+                <apex:column >
+                    <apex:facet name="header">Billable Hours</apex:facet>
+                    {!Allocmap[nba].BillableH}
+                </apex:column> 
+                <apex:column >
+                    <apex:facet name="header">Non-Billable Hours</apex:facet>
+                    {!Allocmap[nba].NonBillableH}
+                </apex:column> 
+                
+                <apex:column >
+                    <apex:facet name="header">Bench</apex:facet>
+                    {!Allocmap[nba].Bench}
+                </apex:column> 
+                <apex:column >
+                    <apex:facet name="header">Leave</apex:facet>
+                    {!Allocmap[nba].Leave}
+                    </apex:column> 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

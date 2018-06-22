@@ -1,0 +1,194 @@
+<apex:page id="thePage" showHeader="false" docType="HTML-5.0"  sidebar="false" standardStylesheets="false" action="{!loadQuestionDetails}" controller="SurveyBuilder.questionBank" extensions="SurveyBuilder.surveyConfigs">   
+    <html>
+        <head>
+            <title>Edit Question</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />                       
+        </head>
+        <body class="edit-question">
+            <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            <c:topPageNavigation myPageTitle="Edit Question" /> 
+            
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="white-box">
+                         <div class="white-box1">
+                             <div class="sectionTitle"> Edit Question  <apex:outputLink value="{!$Page.SurveyBuilder__manageQuestions}"  styleClass="fitlerLeftSpace back-btn">
+                                Go to Manage Questions
+                            </apex:outputLink> </div>
+                        <div class="floatRight clear">
+                            <!-- Commented after QA -->
+                            <!--<apex:outputLink styleClass="green-btn " target="_Blank" rendered="{!questionType != 'free_text'}" value="/apex/editOptions?id={!editID}" >
+                    Manage Options
+</apex:outputLink>-->
+                           
+                        </div>
+                        
+                        <apex:outputPanel styleClass="clear" id="sucessMessage" rendered="{! IF(editID != null,true,false)}">
+                            <!--<apex:messages styleClass="success"/> -->
+                            <apex:pageMessage rendered="{!IsSubmiited}"  summary="List of errors" severity="success" /> <apex:pageMessages />
+                             <div class="insideForm">
+                            <apex:actionStatus id="showQuestionProgress">
+                                <apex:facet name="start">                                                              
+                                    <apex:image url="{!$Resource.SurveyBuilder__loading}" title=" Please wait .."/>
+                                </apex:facet>
+                               
+                                <apex:facet name="stop">
+      								<apex:form styleClass="mainForm clear whitebox-height" id="theForm"> 
+                                        <div Class="formFeild"> 
+                                            <label>Question:</label>
+                                            <div class="feild">
+                                                <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                    <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                                                    <apex:inputText value="{!question}" id="theFieldInput"  html-placeholder="Enter Question" required="true" />
+                                                </apex:outputPanel>
+                                            </div>
+                                        </div>
+                                        <apex:outputPanel rendered="{! questionType != 'free_text'}">
+                                            <div Class="formFeild"> 
+                                                <label>Weightage:</label>
+                                                <div class="feild">
+                                                    <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                        <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                                                        <!--<apex:inputText value="{!weightage}" styleclass="weightageValue" id="editWeightage" html-placeholder="Weightage in number. ex: 10" required="true" onblur="checkWeigthageOnEditPage();" />-->
+                                                        <div class="select-outer">
+														<apex:selectList value="{!selectWeightage}" multiselect="false" size="1" required="true" style="margin-left: 0px;" styleclass="weightageValue" id="editWeightage" onblur="checkWeigthageOnEditPage();" >
+                                                            <apex:selectOptions value="{!weightageOptions}" />
+                                                        </apex:selectList>
+                                                          </div>
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </div>
+                                            <div class="formFeild" id="weightageMsgBlock">
+                                                <label>&nbsp;</label>
+                                                <div class="feild">
+                                                    <div id="weightageMsg" class="weightageMsg"></div>
+                                                </div>
+                                            </div>
+                                        </apex:outputPanel>
+                                        
+                                        
+                                        <!--<div Class="formFeild qs"> 
+                                            <label>Is Active</label>
+                                            <div class="feild"> 
+                                                <apex:inputCheckbox value="{!questionStatus}" /> 
+                                            </div>
+                                        </div> -->
+                                        
+                                        <div Class="formFeild qs"> 
+                                            <label>Type Of Question</label>
+                                            <div class="feild"> 
+                                                <fieldset style="border: none;">
+                                                    <table role="presentation" class="typeQuestions no-padding">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-transform: capitalize;">
+                                                                    <input type="radio" checked="checked" disabled="true" /> 
+                                                                    <label>{!IF(questionType=='free_text','Free Text',questionType)}</label>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </fieldset>
+                                            </div>
+                                        </div> 
+                                        
+                                        <!--<apex:outputPanel id="optionContainer" rendered="{! questionType != 'free_text' }">
+                                        <div Class="formFeild "> 
+                                        <label>&nbsp;</label> 
+                                        <div class="feild optionContainer" > 
+                                        <apex:outputPanel id="fieldOptions">
+                                        <apex:actionStatus id="showOptionDeleteProgress">
+                                        <apex:facet name="start">                                                              
+                                        <apex:image url="{!$Resource.SurveyBuilder__loading}" title=" Please wait .."/>
+                                        </apex:facet>
+                                        <apex:facet name="stop">
+                                        <apex:repeat value="{!QuestionOptions}" var="option" id="theRepeat">
+                                        <div style="margin-bottom:20px;postition:relative;">
+                                        <input type="text" class="questionOptionText" value="{!QuestionOptions[option][0]}" />
+                                        <input type="text" class="questionOptionText" value="{!QuestionOptions[option][1]}" />
+                                        <apex:commandLink action="{!deleteOption}" onclick="confirmDeleteOption();" reRender="fieldOptions" status="showOptionDeleteProgress">
+                                        <apex:param name="optionId" value="{!option}" />    
+                                        <apex:image url="{!$Resource.SurveyBuilder__builder_deleteIcon}" title="Delete"></apex:image>
+                                        </apex:commandLink>
+                                        </div>
+                                        </apex:repeat> 
+                                        </apex:facet>
+                                        </apex:actionStatus>  
+                                        </apex:outputPanel>
+                                        </div> 
+                                        </div>   
+                                        </apex:outputPanel> -->
+                                                                                
+                                                                                <!-- Commented after QA -->
+                                                                                <!-- 
+                                        <div Class="formFeild add_more_label multiselect_add_more_label  radio_add_more_label slider_add_more_label hideMe"> 
+                                        <label>&nbsp;</label>
+                                        <div class="feild">                                                 
+                                        <!--- <apex:outputLabel styleClass="add_more_button" value="Add More Options"  /> ->
+                                        <p class="add_more_button">Add More Options</p>
+                                        </div>
+                                        </div> -->
+                                        <div class="formFeild" id="scoreBlock">
+                                            <label>&nbsp;</label>
+                                            <div class="feild">
+                                                <div id="scoreMsg" class="scoreMsg"></div>
+                                            </div>
+                                        </div>
+                                        <div Class="formFeild "> 
+                                            <label>&nbsp;</label> 
+                                            <div class="feild optionContainer options"></div> 
+                                        </div>
+                                        <apex:inputHidden value="{!selectedOptions}" id="selectedOptions"/> 
+                                        
+                                        <div class="formFeild"> 
+                                          
+                                            <div class="feild">       
+                                                <!-- reRender="sucessMessage"  status="showQuestionProgress"-->                              
+                                                <apex:commandButton value="Save" action="{! editQuestion}" styleClass="default-btn green-btn" onClick="return storeValue('{!$Component.selectedOptions}')" />
+                                            </div>
+                                        </div> 
+                                        
+                                        <script type="text/javascript" language="javascript"> 
+                                        //initActions();                                        
+
+                                        proceccOptions('{! JSENCODE(HTMLENCODE(questionType))}');
+                                        </script>
+                                    </apex:form>
+								</apex:facet>
+                                   
+                            </apex:actionStatus>
+                                  </div>
+                            <apex:form >
+                                <div class="formFeild hideMe slider_question_type multiselect_question_type radio_question_type"> 
+                                    <div class="formBottomFields">
+                                        <apex:inputText value="{!options}" id="options"
+                                                        html-placeholder="Option Name" styleClass="questionOptionText" />
+                                        <apex:inputText value="{!scores}" id="scores"  
+                                                        html-placeholder="Option Score" styleClass="scores questionOptionText" />                                            
+                                        <apex:image url="{!$Resource.SurveyBuilder__builder_deleteIcon}" styleClass="delete_option" title="Remove"/> 
+                                    </div>
+                                </div> 
+                            </apex:form> 
+                            
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel id="errorMessage" rendered="{! IF(editID  == null,true,false)}"> 
+                            <apex:messages styleClass="error"/>   
+                        </apex:outputPanel> 
+                         </div>  
+                    </div>   
+                </div> 
+            </section> 
+            </div>            
+            <apex:include pageName="SurveyBuilder__surveyFooter" /> 
+            <apex:includeScript value="{!$Resource.SurveyBuilder__question}"/>
+            <script type="text/javascript" language="javascript">
+            function confirmDeleteOption(elementObject) {
+                //return window.confirm('Are you sure to delete this option?');
+                return true;
+            }   
+            </script> 
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,98 @@
+<apex:page sidebar="false" showHeader="false" docType="HTML-5.0" controller="SurveyBuilder.configuration" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="false" action="{!loadData}">
+    <html>
+        <head>
+            <title>Survey Configuration</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+        </head>
+        
+        <body class="survey-configuration">
+           <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" />
+            <c:topPageNavigation myPageTitle="Survey Configuration" />
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="white-box">
+                        
+                        <!-- <c:surveyTabs surveyId="{!surveyId}" /> -->
+                        <div class="sectionTitle"> Survey Configuration </div>  
+                        <apex:outputPanel id="configuration">
+                            
+                            <apex:pageMessages />
+                            <apex:form styleClass="mainForm clear no-margin-top" id="theForm">
+                                <div class="insideForm clearfix">
+                                    <div class="survey-configuration-form">
+                                    <div Class="formFeild"> 
+                                       
+                                        <div class="feild">
+                                            <apex:commandLink action="{!startSchedulerAction}" styleClass="add_more_button" rendered="{!isStarted}" status="loadingPage" > <!-- reRender="configuration" -->
+                                                Start Scheduler
+                                            </apex:commandLink>
+                                        </div>
+                                    </div>
+                                    <div class="formFeild" id="formFeild">
+                                        <label>Company Name:</label>
+                                        <div class="feild full-width">
+                                            <apex:outputPanel styleClass="requiredInput" id="sname" layout="block">
+                                                <apex:inputText value="{!companyName}" id="theFieldInput" required="true"  html-placeholder="Enter Company Name"/>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--<div class="formFeild">
+<label>Email From</label>
+<div class="feild">
+<apex:inputText value="{!emailFrom}" id="theFieldInputEmail"  html-placeholder="Enter email"/>
+
+</div>
+</div>-->
+                                    
+                                    <!--<div class="formFeild">
+<label>Site Url</label>
+<div class="feild">
+<apex:inputText value="{!siteUrl}" id="siteUrl"  html-placeholder="Enter company url"/>                                     
+</div>
+</div>-->
+                                    
+                                    <div class="formFeild">
+                                        <label>Upload Logo:</label>
+                                        <div class="feild">
+                                            <apex:inputfile value="{!logo}" accept=".jpg, .jpeg, .png, .gif" contentType="{!content}"  ></apex:inputfile> <!-- onClick="checkLogo();" -->
+                                            <div class="small-text margintop-10">Allowed file extensions: jpg, jpeg, gif and png</div>
+                                            <!--<apex:outputPanel rendered="{If({!displayLogo} !='',true,false)}">-->
+                                            <apex:outputPanel rendered="{!isLogoExist}">
+                                                <apex:image url="{!displayLogo}" />
+                                                <!--<apex:commandLink value="Remove" action="{!removeLogo}" /> -->
+                                                <apex:outputLink styleClass="remove-logo" value="{! $page.surveyConfiguration }" >
+                                                    <apex:image url="{!$Resource.SurveyBuilder__Cross}"/>Remove Logo
+                                                   <!-- <img src="https://surveybuilder.na3.visual.force.com/resource/1489570267000/SurveyBuilder__Cross" alt="remove logo"/>Remove Logo-->
+                                                    <apex:param name="logoAction" value="1" />
+                                                </apex:outputLink>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                        <div class="formFeild">
+                                            <label>Site-URL</label>
+                                            <div class="feild full-width">
+                                                <apex:inputTextarea value="{!siteUrl}" html-placeholder="URL"  styleClass="requiredInput" />
+                                            </div>
+                                        </div> 
+                                    
+                                    
+                                    <div class="formFeild">
+                                      
+                                        <div class="feild">
+                                            <apex:commandButton styleClass="green-btn" id="create" action="{! dataInsert }"  value="Save"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </apex:form>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </section>
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" />
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,154 @@
+<apex:page controller="DispSendController" sidebar="false" showHeader="false" standardStylesheets="false">
+<html>
+<head>
+<title>Preview</title>
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"/>
+<apex:includeScript value="https://code.jquery.com/jquery-2.1.1.js"/>
+<apex:includeScript value="https://code.jquery.com/ui/1.11.1/jquery-ui.js"/>
+<apex:stylesheet value="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css"/>
+
+<apex:includeScript value="{!$Resource.simpleSliderJS}"/>
+<apex:stylesheet value="{!$Resource.simpleSliderCSS}"/>
+<apex:stylesheet value="{!$Resource.simpleSliderVolume}"/>
+
+<apex:stylesheet value="{!$Resource.FinalCSS}"/>
+
+<style>
+#dataSlider{
+display:none !important;
+}
+
+.OptionDiv{
+    Border:2px grey solid;
+    margin:10px;
+    padding:20px;
+    text-align:center;
+}
+
+.Que1 span{
+font-weight:bold;
+}
+
+.OptionDiv *{
+ vertical-align:middle;
+ margin:0 auto;
+}
+</style>
+</head>   
+<body>
+<div class="page-wrap">
+   <header class="mainHeader">
+    <div class="container clear">
+        <a href="https://na30.salesforce.com/apex/SBIndex" class="logo"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvk&oid=00D36000000jB0z&lastMod=1467952746000" alt=""/></a>
+        <div class="nav">
+            <ul>
+                <li><a href="https://na30.salesforce.com/apex/SBIndex" class="home"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvf&oid=00D36000000jB0z&lastMod=1467952727000" alt=""/></a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBQuestionBank">Question Bank</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBCreateSurvey">Create Survey</a></li>
+                <li class="active"><a href="https://na30.salesforce.com/apex/SBSendSurvey">Send Survey</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBREPORT">Report</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+    <section class="page-name">
+        <div class="container clear">
+            <h2><span style="font-weight:bold;">Preview :</span>&nbsp;Survey</h2>
+        </div>
+    </section>
+    
+<section class="bodyContainer">
+        <div class="container clear">
+            <div class="white-box"> 
+                <div class="theme-box">
+                    <apex:repeat value="{!question}" var="fd">  
+                    <!-- Question style one -->  
+                    <apex:outputPanel rendered="{!IF(fd.Related_Question__r.Type__c='Radio',true,false)}">            
+                    <div class="Que1">
+                    <apex:outputField value="{!fd.Related_Question__r.Question__c}"/> 
+                    <div class="OptionDiv">
+                    <apex:form >
+                    
+                        <div style="padding: 20px;">
+                             <apex:selectRadio value="{!OptionOne}" id="SelectedRadio">
+                                <apex:selectOption itemValue="{!fd.Option_One__c}" itemLabel="{!fd.Option_One__c}"></apex:selectOption>
+                                <apex:selectOption itemValue="{!fd.Option_Two__c}" itemLabel="{!fd.Option_Two__c}"></apex:selectOption>
+                                <apex:selectOption itemValue="{!fd.Option_Three__c}" itemLabel="{!fd.Option_Three__c}"></apex:selectOption>
+                                <apex:selectOption itemValue="{!fd.Option_Four__c}" itemLabel="{!fd.Option_Four__c}"></apex:selectOption>
+                                <apex:selectOption itemValue="{!fd.Option_Five__c}" itemLabel="{!fd.Option_Five__c}"></apex:selectOption>
+                             </apex:selectRadio>
+                        </div>     
+                    </apex:form>
+                    </div>                       
+                    </div>
+                    </apex:outputPanel>                      
+                    <!-- Question style one -->
+                    
+                    <!-- Question style two -->  
+                    <apex:outputPanel rendered="{!IF(fd.Related_Question__r.Type__c='Slider',true,false)}">        
+                    <div class="Que1">
+                   
+                     <apex:outputLabel value="{!fd.Related_Question__r.Question__c}" style="font-weight:bold;" ></apex:outputLabel>
+                     <div class="OptionDiv">
+                    <apex:form >
+                    <div style="margin-left: 31.5%; padding: 20px;">        
+                           <input type="text" data-slider="true" value="0" data-slider-highlight="true" id="dataSlider" styleClass="textboxslider"/>
+                     </div>      
+                     </apex:form>    
+                     </div>
+                    </div>                      
+                    </apex:outputPanel>
+                    <!-- Question style two -->
+                    
+                    <!-- Question style three -->               
+                    <apex:outputPanel rendered="{!IF(fd.Related_Question__r.Type__c='Free-Text',true,false)}"> 
+                    <div class="Que1">
+                      <apex:outputLabel value="{!fd.Related_Question__r.Question__c}" style="font-weight:bold;"></apex:outputLabel>
+                      
+                        <apex:form styleclass="mainForm martop15 marbot30">
+                           <div class="formFeild">
+                           
+                              <div class="feild" style="Border: 2px grey solid;padding: 10px !important;">
+                               <apex:inputTextarea value="{!SelectedValue}" id="FreeTextField" styleClass="textbox"/>
+                              </div>
+                              
+                            </div>
+                         </apex:form>
+                        
+                     </div>                      
+                     </apex:outputPanel> 
+          <!-- Question style three -->
+               </apex:repeat>  
+               
+                <div class="Que1 martop15">
+                <apex:form >
+                     <div class="form-group">
+                     <label></label>
+                     <div class="field-outer" style="width: 52%; padding-top: 20px;">
+                        <apex:commandButton value="Send" action="{!SendContacts}" styleClass="green-btn" />
+                     
+                     </div>
+                     
+                     </div>
+                    </apex:form>
+                    <!--28 july 2016 end--> 
+                 </div>
+                    
+                 </div> 
+            </div>
+       </div>
+</section>    
+</div>
+
+<footer class="main-footer">
+    <ul>
+        <li> <a href="#">Privacy Policy</a> </li>
+        <li><a href="#">Terms of Services</a></li>
+    </ul>
+    <div class="copyright">© 2016 Survey Builder, All rights reserved. </div>
+</footer> 
+
+</body>
+</html>
+</apex:page>

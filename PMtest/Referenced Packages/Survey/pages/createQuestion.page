@@ -1,0 +1,274 @@
+<apex:page id="thePage" showHeader="false" docType="HTML-5.0"  sidebar="false" standardStylesheets="false" controller="SurveyBuilder.questionBank" extensions="SurveyBuilder.surveyConfigs">   
+    
+    <html>
+        <head>
+            <title>Create Question</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+        </head>
+        <style>
+            .heading{MARGIN: 0PX; background: #2d3e4e !important;padding: 0 15px !important;
+    height: 40px !important;
+    border: none !important;
+    
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: white !important;
+    text-align: center !important;}</style>
+        <body class="create-question-page">
+            <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            <c:topPageNavigation myPageTitle="Create Question" /> 
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="white-box">
+                        <div class="sectionTitle"> Create Question 
+                             <apex:outputLink value="{!$Page.SurveyBuilder__manageQuestions}"  styleClass="back-btn">
+                                Go to Manage Questions
+                            </apex:outputLink>
+                            
+                        </div> 
+                            <div class="clear"></div>
+
+                    <div class="insideForm clearfix">
+                        
+                     
+                        <apex:outputPanel styleClass="clear"  id="sucessMessage">
+                               
+                                
+                                
+                                <!--<apex:messages styleClass="success"/> -->
+                                <apex:pageMessage rendered="{!IsSubmiited}" summary="List of errors" severity="success" /> <!--<apex:pageMessages />-->
+                                
+                                <apex:actionStatus id="showQuestionProgress">
+                                    <apex:facet name="start">                                                              
+                                        <apex:image url="{!$Resource.SurveyBuilder__loading}" title=" Please wait .."/>
+                                    </apex:facet>
+                                    <apex:facet name="stop">
+                                   
+                               <apex:form styleClass="mainForm whitebox-height"  id="theForm">
+                                    <div Class="formFeild"> 
+                                        <label>Question</label>
+                                        <div class="feild">
+                                            <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                                                <apex:inputText value="{!question}" id="theFieldInput"  html-placeholder="Enter Question" required="true" />
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="formFeild" id="weightageMsgBlock">
+                                        <label>&nbsp;</label>
+                                        <div class="feild">
+                                            <div id="weightageMsg" class="weightageMsg"></div>
+                                        </div>
+                                    </div>
+                                    <!--<div Class="formFeild qs"> 
+                                        <label>Is Active</label>
+                                        <div class="feild"> 
+                                            <apex:inputCheckbox value="{!questionStatus}" /> 
+                                        </div>
+                                    </div> -->
+                                    
+                                    <div Class="formFeild qs"> 
+                                        <label>Type Of Question</label>
+                                        <div class="feild">  
+                                            <apex:selectRadio styleClass="typeQuestions" value="{!questionType}">
+                                                <apex:selectOptions value="{!questionTypes}" />
+                                            </apex:selectRadio>  
+                                        </div>
+                                    </div> 
+                                    
+                                    <div Class="formFeild hideMe" id="weightage"> 
+                                        <label>Weightage</label>
+                                        <div class="feild">
+                                            <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                                                <!--<apex:input type="number" html-min="1" styleclass="weightageValue" value="{!weightage}" id="weightageValue"  html-placeholder="Weightage in number. ex: 10" required="true" onkeypress="return IsNumeric(event);" />-->
+                                                 <div class="select-outer">
+                                                <apex:selectList value="{!selectWeightage}" multiselect="false" size="1" required="true" styleclass="weightageValue" style="margin-left: 0px;">
+                                                    <apex:selectOptions value="{!weightageOptions}" />
+                                                </apex:selectList>
+                                                </div>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </div>
+                                    
+                                    <div Class="formFeild add_more_label multiselect_add_more_label  radio_add_more_label slider_add_more_label hideMe"> 
+                                        <label>&nbsp;</label>
+                                        <div class="feild">                                                 
+                                            <!-- <apex:outputLabel styleClass="add_more_button" value="Add More Options"  /> -->
+                                            <p class="hideMe" id ="sliderText">slider first option carries value zero and last option will be at 100</p><br/>
+                                            <p class="add_more_button">Add Options</p>
+                                            <div class="optionBottomSpacing clear edit-option-heading-row" style="WIDTH: 100%; padding: 5px">
+                                                <input class="heading" disabled="true" type="text" value="Option" style="WIDTH: 72%; "/>
+                                                <input class="heading" disabled="true" type="text" value="Score" style="WIDTH: 20%;"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="formFeild" id="scoreBlock">
+                                            <label>&nbsp;</label>
+                                            <div class="feild">
+                                                <div id="scoreMsg" class="scoreMsg"></div>
+                                            </div>
+                                        </div>
+                                    <div Class="formFeild  hideMe"> 
+                                       
+                                        <div class="feild optionContainer options"></div>
+                                    </div>
+                                    <div id="addmore-bottom">
+                                        <div Class="formFeild add_more_label multiselect_add_more_label  radio_add_more_label slider_add_more_label hideMe"> 
+                                            <label>&nbsp;</label>
+                                            <div class="feild">                                                 
+                                                <!-- <apex:outputLabel styleClass="add_more_button" value="Add More Options"  /> -->
+                                                <p class="add_more_button">Add Options</p>
+                                            </div>
+                                        </div>  
+                                    </div>                          
+                                    <apex:inputHidden value="{!selectedOptions}" id="selectedOptions"/> 
+                                    
+                                    <div class="formFeild"> 
+                                        <label>&nbsp;</label>
+                                        <div class="feild">    
+                                        
+                                        <!-- status="showQuestionProgress"   reRender="sucessMessage" -->                              
+                                            <apex:commandButton value="Save"  styleClass="green-btn default-btn"  onClick="check('{!$Component.selectedOptions}');return false;" />
+                                            <apex:actionFunction name="doCreate" action="{! addQuestion}"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <script type="text/javascript" language="javascript"> 
+                                    //initActions();
+                                    </script>
+                              </apex:form>
+                                 </apex:facet>
+                                </apex:actionStatus>  
+                        </apex:outputPanel>
+                        
+                       <apex:form > 
+                            <div class="formFeild hideMe slider_question_type multiselect_question_type radio_question_type"> 
+                               
+                         
+                                <div class="formBottomFields">
+                                    
+                                    <apex:inputText value="{!options}" id="options"
+                                                    accesskey=""            html-placeholder="Option Name" styleClass="questionOptionText" />
+                                    <!--<apex:inputText value="{!scores}" id="scores"  
+                                                    html-placeholder="Option Score" styleClass="scores questionOptionText" onkeypress="return IsNumeric(event);"/>-->
+                                    
+                                    <div class="select-outer">
+                                    <apex:selectList value="{!selectScore}" multiselect="false" size="1" id="scores" styleClass="scores questionOptionText" style="margin-left: 0%;">
+                                        <apex:selectOptions value="{!scoreOptions}" />
+                                    </apex:selectList>
+                                    </div>
+                                    <apex:image url="{!$Resource.SurveyBuilder__builder_deleteIcon}" styleClass="delete_option" title="Remove"/> 
+                                </div>
+                            </div>
+                            
+                      </apex:form> 
+                    </div> 
+                      </div>
+                </div> 
+            </section> 
+            <script>
+            //Function for attaching validation and calling createSurveyQuestionnaire method using apex:actionFunction
+            function check(selectedOptions)
+            {   
+                if(checkQuestionText() == false)//checkes Question text entered or not.
+                {
+                    validated = false;    
+                }
+                else
+                {
+                    if($(".typeQuestions input[type='radio']:checked").val().trim() == 'free_text' )
+                    {
+                        doCreate();
+                        return true;
+                    }
+                    if($(".typeQuestions input[type='radio']:checked").val().trim() == 'slider' )
+                    {                    
+                        doCreate();
+                        return true;
+                    }                
+                    //Check atleast one option exist or not
+                    if($('.options').children().length >= 1)
+                    {
+                        if(storeValue(selectedOptions))
+                        {                        
+                            validated = true;
+                            //check whether that option is empty or not
+                            if($('.options').find('.questionOptionText').val().trim()=='' || $('.options').find('.scores').val().trim()=='')
+                            {
+                                removeScoreError();
+                                showScoreError('Please Enter Your First Option');//first option data is empty.
+                                validated = false;
+                            }
+                     
+                            if(validated){
+                                removeScoreError();
+                                doCreate();
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        removeScoreError();
+                        showScoreError('Atleast One Option Should be added in order to add a question in the survey.');
+                        return false;
+                    }
+                }//end of else
+            }
+            /* Add Activity Textbox validation*/          
+             var specialKeys = new Array();
+             specialKeys.push(8); //Backspace
+            function IsNumeric(e) 
+            {                   
+                 var keyCode = e.which ? e.which : e.keyCode
+                 var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);                    
+                 //document.getElementById("error").style.display = ret ? "none" : "inline";
+                 return ret;    
+            }
+            function changeType()
+            {
+                var txtscore = document.getElementsByClassName("scores questionOptionText");
+                if(txtscore!=null)
+                {
+                   for (var i = 0; i < txtscore.length; ++i) 
+                   {
+                       txtscore[i].setAttribute('type', 'number');
+                       txtscore[i].setAttribute('min', '1');
+                   }
+                }
+            }
+            //changeType();
+            </script>
+            <script>
+            /* function validateScore() {
+               alert('invalid option');
+                  var validated = true;
+                  $('.scores').each(function() {
+                      $(this).val().removeClass('error');
+                      if($(this).val() > $('.weightageValue').val()) {
+                         
+                         $(this).val().addClass('error');
+                      }
+                  
+                  })
+                  
+                  return false;
+               } */
+            </script>
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" /> 
+             <apex:includeScript value="{!$Resource.SurveyBuilder__question}"/> 
+            
+            
+        </body>
+    </html>
+    
+</apex:page>

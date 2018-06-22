@@ -1,0 +1,161 @@
+<apex:page sidebar="false" showHeader="false" docType="HTML-5.0"  controller="SurveyBuilder.customListOfTemplate" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="false">
+    <html>
+        <head>
+            <title>Survey Email Template</title>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyMasterCss, 'master.css') }"/>
+            <!-- for jquery alert box --> 
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jqueryConfirmstyles, 'jqueryConfirmstyles/jqueryConfirmstyles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jQueryConfirmCss, 'jquery.confirm/jquery.confirm.css')}"/>
+            <!-- for jquery alert box --> 
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags"/>
+            <script type="text/javascript">
+            setTimeout(function() {
+                $('#test').fadeOut('fast');
+            }, 2000);
+            </script>
+             <script>
+            function clickToDelete(id) {
+               $.confirm({
+                            'title'     : 'Confirm before continue',
+                            'message'   : 'Are you sure you want to delete' ,
+                            'buttons'   : {
+                                'Yes'   : {
+                                    'class' : 'blue',
+                                    'action': function(){
+                                        deleteTemplate(id);
+									 }
+                                 },
+                                'No'    : {
+                                    'class' : 'gray',
+                                    'action': function(){
+                                    return false;
+                                    }  // Nothing to do in this case. You can as well omit the action property.
+                                }
+                            }
+                        });
+                 
+             return false;
+            }
+            </script>
+        </head>
+        <body class="list-email-template">
+        	<div class="page-wrap">
+          		<apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            	<c:topPageNavigation myPageTitle="List of templates" /> 
+                <section class="bodyContainer">
+                    <div class="container clear">               
+                        <apex:form styleClass="searchForm" id="searchForm" >
+                            <div class="white-box">
+                                <div class="sectionTitle"> List of templates </div> 
+                                <apex:outputPanel id="templateList" layout="block" >
+                                    <div class="form-box-outer">
+                                        
+                                        <apex:actionFunction name="deleteTemplate" action="{!deleteTemplateController}" rerender="none">
+                                            <apex:param id="aname" name="idToDelete" value="" assignTo="{!idToDelete}"  />
+                                         </apex:actionFunction>
+                                        
+                                            <div Class="formFeild1 clear"> 
+                                                <div class="feild">
+                                                    <apex:outputPanel styleClass="requiredInput top-btn-section" layout="block">
+                                                        <apex:inputText value="{!searchFilter}" styleClass="optionText question-field" />
+                                                        <span class="filter-reload-btn-outer">
+                                                            <apex:commandButton value="Filter" action="{! search }" styleClass="green-btn default-btn filter-btn" reRender="templateList" />
+                                                            <apex:commandButton value="Reset" action="{! Reload }" styleClass="green-btn reload-btn fitlerLeftSpace" reRender="templateList"/>
+                                                         </span>
+                                                        <div class="addnew-btn-outer">
+                                                            <apex:commandButton value=" Create New" action="{! createTemplate }" styleClass="green-btn default-btn addnew-btn" style="font-weight: bold;" />
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </div> 
+                                        
+                                    
+                                    <div class="table-responsive">
+
+                                        <div class="clear" id="test">
+                                            <apex:pageMessages />
+                                        </div>
+                                        <apex:dataTable rendered="{!(templates.size >0)}" value="{!templates}" var="temp" styleClass="defaultTable no-padding">
+                                            
+                                            <apex:column headerValue="Subject" styleClass="Outputter3" >
+                                                <apex:outputField value="{!temp.SurveyBuilder__Title__c}" />
+                                                <apex:variable var="vara" value="{!temp.SurveyBuilder__Title__c}" />
+                                            </apex:column>
+                                            
+                                            <apex:column colspan="1" styleClass="Outputter3"> <!-- headerValue="Action" headerClass="headerStyle" -->
+                                               <div class="action-links">
+                                                   
+                                                
+                                                <apex:outputPanel rendered="{!temp.SurveyBuilder__Status__c != true}">
+                                                    <div class="tooltip"> 
+                                                        <apex:commandLink action="{! selectTemplate }" rerender="templateList" rendered="{!temp.SurveyBuilder__Status__c != true}">
+                                                            <apex:param name="selectTemplate" value="{!temp.Id}" assignTo="{! selected }"/>
+                                                            <apex:image url="{!URLFOR($Resource.activate) }" />
+                                                            <span class="tooltiptext">Activate</span>
+                                                        </apex:commandLink>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                 <apex:outputPanel rendered="{!temp.SurveyBuilder__Status__c == true}">
+                                                    <div class="tooltip"> 
+                                                            <apex:image url="{!URLFOR($Resource.builder_AlreadyActiveIcon) }" />
+                                                    </div>
+                                                </apex:outputPanel>
+                                                
+                                                <!-- <apex:outputText rendered="{!temp.SurveyBuilder__Status__c != true}">&nbsp;&nbsp;</apex:outputText>
+                                                    <apex:commandLink action="{! selectedTemplateDeactivate }" rerender="templateList" rendered="{!temp.Status__c != false}">
+                                                        Deactive
+                                                        <apex:param name="selectTemplate" value="{!temp.Id}" assignTo="{! selected }"/>
+                                                </apex:commandLink> -->
+                                                    
+                                                <div class="tooltip">       
+                                                    <apex:outputLink value="/apex/updateTemplate?id={!temp.Id}">
+                                                        <apex:image url="{!$Resource.SurveyBuilder__builder_editIcon}"/>
+                                                    </apex:outputLink>
+                                                    <span class="tooltiptext">Edit</span>
+                                                </div>
+                                                
+                                                <apex:outputPanel rendered="{!temp.SurveyBuilder__Status__c != true}">
+                                                <div class="tooltip">
+                                                    <apex:commandLink reRender="templateList" rendered="{!temp.SurveyBuilder__Status__c != true}" onclick="clickToDelete('{!temp.Id}')">
+                                                            <apex:image url="{!URLFOR($Resource.builder_deleteIcon) }"/>
+                                                    </apex:commandLink> 
+                                                    <!--<apex:outputLink value="/apex/listOfEmailTemplate?id={!temp.Id}" rendered="{!temp.SurveyBuilder__Status__c != true}" 
+                                                                    onclick="clickToDelete('{!temp.Id}')">
+                                                        <apex:image url="{!URLFOR($Resource.builder_deleteIcon) }"/>
+                                                    </apex:outputLink> -->
+                                                    <span class="tooltiptext">Delete Template</span>
+                                                </div>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!temp.SurveyBuilder__Status__c == true}">
+                                                    <div class="tooltip">
+                                                            <apex:image url="{!URLFOR($Resource.builder_deactiveDeleteIcon) }"/>
+                                                    </div>
+                                                </apex:outputPanel>
+                                                  </div>   
+                                            </apex:column>
+                                           
+                                        </apex:dataTable>
+                                    </div>
+                                    <c:globalPageIniation rendered="{!(templates.size >0)}" pagingObject="{!con}" />
+                                    <apex:outputText rendered="{!(templates.size ==0)}">
+                                        <div class="clear noRecords">
+                                            There are no templates to display.
+                                        </div>
+                                    </apex:outputText>
+                                    </div>
+                                </apex:outputPanel>
+                            </div>
+                        </apex:form>
+                    </div> 
+                </section>
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter"/>
+            <!-- for jquery alert box -->
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmJs}"/>
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmscript}"/> 
+            <!-- for jquery alert box -->
+       
+        </body>
+        
+    </html>
+</apex:page>

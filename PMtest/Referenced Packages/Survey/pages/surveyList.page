@@ -1,0 +1,191 @@
+<apex:page sidebar="false" showHeader="false" controller="SurveyBuilder.SurveyList" standardStylesheets="false" applyHtmlTag="false" 
+           applyBodyTag="false" docType="HTML-5.0">
+    <html>
+        <head>
+             <script>
+            function clickToDelete(id) {
+               $.confirm({
+                            'title'     : 'Confirm before continue',
+                            'message'   : 'Are you sure you want to delete' ,
+                            'buttons'   : {
+                                'Yes'   : {
+                                    'class' : 'blue',
+                                    'action': function(){
+                                        deleteTemplate(id);
+                                        return true;
+									 }
+                                 },
+                                'No'    : {
+                                    'class' : 'gray',
+                                    'action': function(){
+                                    return false;
+                                    }  // Nothing to do in this case. You can as well omit the action property.
+                                }
+                            }
+                        });
+                 
+             return false;
+            }
+            </script>
+            <title>Survey List</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+            <!-- for jquery alert box -->
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jqueryConfirmstyles, 'jqueryConfirmstyles/jqueryConfirmstyles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jQueryConfirmCss, 'jquery.confirm/jquery.confirm.css')}"/>
+            <!-- for jquery alert box -->           
+        </head>
+        <body class="survey-list-page">
+            <div class="page-wrap">
+                <apex:include pageName="SurveyBuilder__surveyHeader" />
+                <c:topPageNavigation myPageTitle="Survey List" />
+                <section class="bodyContainer">
+                    <div class="container clear"> 
+                        <apex:form styleClass="searchForm">
+                            <div class="white-box">
+                                <apex:actionFunction name="deleteTemplate" action="{!deleteSurvey}" rerender="none">
+                                            <apex:param id="aname" name="id" value="" assignTo="{!idToDelete}"  />
+                                        </apex:actionFunction>
+                                        
+                                
+                                <div class="inner-box">
+                                    <div class="sectionTitle clear"> Survey List </div> 
+                                    <div class="form-box-outer">
+                                        <div class="fullwidth">
+                                            <div Class="formFeild1 clear"> 
+                                                <div class="feild">
+                                                    <apex:outputPanel styleClass="requiredInput clear top-btn-section" layout="block">
+                                                      
+                                                        <apex:inputText value="{!searchFilter}" html-placeholder="Survey Name" styleClass="optionText question-field" />
+                                                       <span class="filter-reload-btn-outer">
+                                                           <apex:commandButton value="Filter" action="{! search }" styleClass="green-btn filter-btn" reRender="opPnlRerender" />
+                                                        <apex:commandButton value="Reset" action="{! Reload }" styleClass="green-btn reload-btn fitlerLeftSpace" reRender="opPnlRerender"/>
+                                                           </span> 
+                                                        
+                                                                                       
+                                                        <div class="floatRight clear addnew-btn-outer no-padding-right">
+                                                            <apex:commandButton value=" Create New" action="{! createSurvey }"  styleClass="green-btn addnew-btn" />
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <apex:outputPanel id="opPnlRerender" layout="block" >
+                                                    <apex:pageMessages />
+                                                    <apex:dataTable value="{!surveys}" var="s" rendered="{!(surveys.size >0)}" styleClass="defaultTable no-padding">
+                                                        <apex:column headerValue="Name" styleClass="Outputter3" >
+                                                            <apex:outputField value="{!s.Name}" />
+                                                            <apex:variable var="vara" value="{!s.Name}" />
+                                                        </apex:column>
+                                                        <apex:column headerValue="Rating" styleClass="Outputter3" >
+                                                            <apex:outputField value="{!s.SurveyBuilder__rating__c}" />
+                                                            <apex:variable var="vara" value="{!s.SurveyBuilder__rating__c}" />
+                                                        </apex:column>
+                                                        <apex:column headerValue="Description" styleClass="Outputter3" >
+                                                            <apex:outputField value="{!s.SurveyBuilder__Description__c}" />
+                                                            <apex:variable var="des" value="{!s.SurveyBuilder__Description__c}" />
+                                                        </apex:column>
+                                                        
+                                                        <apex:column colspan="1" styleClass=""> <!-- headerValue="Action" headerClass="headerStyle" -->
+                                                            <div class="action-links">
+                                                                <div class="tooltip">       
+                                                                    <apex:outputLink value="/apex/editSurvey">
+                                                                        <apex:param name="id" value="{! s.Id }" />  
+                                                                        <apex:image url="{!$Resource.SurveyBuilder__builder_editIcon}"/></apex:outputLink>
+                                                                    <span class="tooltiptext">Edit Survey Details</span>
+                                                                </div>
+                                                                
+                                                                                                            <!-- &nbsp;&nbsp; 
+                                                                <div class="tooltip">       
+                                                                <apex:outputLink value="{! $page.createSurveyQuestions}">
+                                                                <apex:image url="{!$Resource.AddIcon}" />
+                                                                <apex:param name="surveyId" value="{! s.Id }" />  
+                                                                </apex:outputLink>  
+                                                                <span class="tooltiptext">Add Questions</span>
+                                                                </div> 
+                                                                
+                                                                <apex:outputText rendered="{! s.isSent__c == false}">&nbsp;&nbsp;
+                                                                <apex:outputLink value="/apex/SBRecipient?id={!s.Id}">
+                                                                <div class="tooltip"><apex:image Url="{!$Resource.AddRecipientIcon}"/><span class="tooltiptext">Add Recipient</span></div>
+                                                                </apex:outputLink>
+                                                                </apex:outputText> -->
+                                                                                                            
+                                                                                                            <!--&nbsp;&nbsp;
+                                                                <div class="tooltip">       
+                                                                <apex:outputLink value="{! $page.previewSurvey}"><apex:image url="{!$Resource.previewIcon}" />
+                                                                <apex:param name="surveyId" value="{! s.Id }" />
+                                                                </apex:outputLink>
+                                                                <span class="tooltiptext">Preview Survey</span>
+                                                                </div>-->
+                                                                                                            
+                                                                                                            
+                                                                                                            <!-- <apex:outputText rendered="{! s.isSent__c == false}">&nbsp;&nbsp;
+                                                                <apex:commandLink action="{!sendEmailToRecipient}" reRender="opPnlRerender"  >
+                                                                <div class="tooltip">
+                                                                <apex:param name="sendSurvey" value="{! s.Id }" assignTo="{! surveyId }" />
+                                                                <apex:image url="{!$Resource.sendSurvey}" />
+                                                                <span class="tooltiptext">Send Survey</span>
+                                                                </div>
+                                                                </apex:commandLink>
+                                                                </apex:outputText>
+                                                                -->
+                                                                <div class="tooltip">
+                                                                    <apex:outputLink value="{! $page.cloneSurvey}" >
+                                                                        <apex:param name="Id" value="{! s.Id }"  />
+                                                                        <apex:image url="{!$Resource.SurveyBuilder__clone}" />
+                                                                    </apex:outputLink>
+                                                                    <span class="tooltiptext">Make Clone</span>
+                                                                </div>
+                                                                <div class="tooltip">
+                                                                    <apex:outputLink value="{! $page.viewReport}" >
+                                                                        <apex:param name="surveyId" value="{! s.Id }"  />
+                                                                        <apex:image url="{!$Resource.SurveyBuilder__viewReport}" />
+                                                                    </apex:outputLink>
+                                                                    <span class="tooltiptext">View Report</span>
+                                                                </div>
+                                                                <div class="tooltip">
+                                                                    <apex:outputLink value="{! $page.feedBacks}" >
+                                                                        <apex:param name="sId" value="{! s.Id }"  />
+                                                                        <apex:image url="{!$Resource.SurveyBuilder__feedback}" />
+                                                                    </apex:outputLink>
+                                                                    <span class="tooltiptext">Feedbacks</span>
+                                                                </div>
+                                                                <div class="tooltip">
+                                                                    <!-- reRender="opPnlRerender" -->
+                                                                    <!--<apex:outputLink value="/apex/surveyList?id={!s.Id}"  
+                                                                                     onClick="return returnConfirm(this,'Are you sure to delete the survey?');">
+                                                                        <apex:image url="{!$Resource.builder_deleteIcon}" />
+                                                                    </apex:outputLink>-->
+                                                                    <apex:commandLink onclick="return clickToDelete('{!s.Id}')">
+                                                                        <apex:image url="{!URLFOR($Resource.builder_deleteIcon) }"/>
+                                                                    </apex:commandLink> 
+                                                                    <span class="tooltiptext">Delete Survey</span>
+                                                                </div>
+                                                            </div>
+                                                        </apex:column>
+                                                        
+                                                    </apex:dataTable>
+                                                    <c:globalPageIniation rendered="{!(surveys.size != 0)}" pagingObject="{!con}" />
+                                                    <apex:outputText rendered="{!(surveys.size == 0)}">
+                                                        <div class="clear noRecords">
+                                                            There are no surveys to display.
+                                                        </div>
+                                                    </apex:outputText>
+                                                </apex:outputPanel>
+                                            </div>     
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:form>
+                    </div>
+                </section>
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" />
+            
+            <!-- for jquery alert box -->
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmJs}"/>
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmscript}"/> 
+            <!-- for jquery alert box -->
+        </body>
+    </html>
+</apex:page>

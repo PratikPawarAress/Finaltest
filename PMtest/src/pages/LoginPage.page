@@ -1,0 +1,47 @@
+<apex:page controller="LoginPageController" showHeader="false" docType="html-5.0">
+<style> 
+	.maindiv{
+    }  
+    .main-form{
+    	margin: auto;
+    	height:650px;
+    	width:100%;
+    	padding: 20px 400px 200px;
+    }
+    .header-footer{
+    	background-color: #DCDCDC;
+    	width:100%;
+    }
+    .title{
+    	font-weight:bold;
+    	font-size: 30px;    
+    }
+    
+</style> 
+   <div class="maindiv">
+   <apex:form >
+	 <apex:slds />
+     <div class="header-footer">
+        <div align="center"><apex:image alt="aressLogo" value="{!$Resource.Logo2}"/>
+            <p class="title">Welcome to PMForce </p></div>
+      </div>  
+      <div class="main-form">
+           <apex:pagemessages ></apex:pagemessages>
+       <apex:pageBlock >
+           <div align="center">
+                <apex:outputPanel title="Login">
+                    <apex:outputText >Employee Code &nbsp;&nbsp;</apex:outputText>
+                    <apex:inputText value="{!employeecode}" id="code"/> <br /><br />
+                    <apex:commandButton value="Login" action="{!login}" />
+                </apex:outputPanel>    
+            </div>
+          
+	  </apex:pageBlock>
+    </div>     
+	</apex:form>
+    </div>
+     <div class="header-footer">
+         <div> <span><p align="center">© 2018 Aress Software and Education Technologies (P) Ltd. All rights reserved.</p></span> </div>
+     </div>
+      
+</apex:page>

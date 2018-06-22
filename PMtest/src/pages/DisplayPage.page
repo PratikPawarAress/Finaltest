@@ -1,0 +1,241 @@
+<apex:page controller="DisplayController" sidebar="false" showHeader="false" standardStylesheets="false">
+<html>
+<head>
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"/>
+<apex:includeScript value="https://code.jquery.com/jquery-2.1.1.js"/>
+<apex:includeScript value="https://code.jquery.com/ui/1.11.1/jquery-ui.js"/>
+<apex:stylesheet value="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css"/>
+<apex:stylesheet value="https://fonts.googleapis.com/css?family=Titillium+Web"/>
+
+<apex:includeScript value="{!$Resource.simpleSliderJS}"/>
+<apex:stylesheet value="{!$Resource.simpleSliderCSS}"/>
+<apex:stylesheet value="{!$Resource.simpleSliderVolume}"/>
+
+<apex:stylesheet value="{!$Resource.FinalCSS}"/>
+<title>Survey</title>
+<style>
+
+#dataSlider{
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+ -moz-border-radius-topright: 30px;
+-webkit-border-top-right-radius: 30px;
+border-top-right-radius: 30px;
+-moz-border-radius-bottomleft: 30px;
+-webkit-border-bottom-left-radius: 30px;
+border-bottom-left-radius: 30px;
+border: 1px solid #19b2ef;
+outline: 0;
+height: 25px;
+width: 59px;
+padding-right: 15px;
+padding-left: 15px;
+box-shadow: 0 0 5px 3px #19b2ef;
+margin-top: 10px;
+margin-left: -280px;
+}
+
+.OptionDiv{
+    Border:2px grey solid;
+    margin:10px;
+    padding:20px;
+    text-align:center;
+}
+
+.Que1 span{
+font-weight:bold;
+}
+
+.OptionDiv *{
+ vertical-align:middle;
+ margin:0 auto;
+}
+
+.main-footer{
+    position: absolute;
+    z-index: 150;
+    left: 0;
+    right: 0;
+}
+
+.main-footer .footer-label{
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+        font-size: 25px;
+}
+</style>
+<script type="text/javascript">
+
+var ansArray = [];
+ansArray[0] = "";
+ansArray[1] = "";
+ansArray[2] = "";
+ansArray[3] = "";
+ansArray[4] = "";
+
+function changeValue(input,textid,count) {
+            ansArray[count] = input.value;
+   
+   <!--alert(ansArray);-->
+}
+
+   
+</script>    
+<script>
+function SubmitSurvey(node){
+  
+    InvokeController(JSON.stringify(ansArray));
+      <!--alert(JSON.stringify(ansArray));-->
+}
+</script>
+</head>
+
+<body>
+<div class="page-wrap">
+    <header class="mainHeader">
+        <a href="#" class="logo"><apex:image value="{!secondSubString}" style="height:80px; width:165px; margin-left:105px;"/></a>
+        <div class="container clear">
+                <p style="margin-left: 40%;color: white;font-size: 50px;margin-top: -5.2%;"><apex:outputLabel value="{!mainobj.Header_Text__c}"></apex:outputLabel> </p>
+        </div>
+    </header>
+    <section class="page-name">
+        <div class="container clear">
+            <h2>Your feedback is valuable !</h2>
+        </div>
+    </section>
+    <section class="bodyContainer">
+        <div class="container clear">
+            <div class="white-box"> 
+                <div class="theme-box">
+                  <apex:variable var="count" value="{!0}"/>
+                      <apex:repeat value="{!Questions}" var="q">  
+                    <!-- Question style one -->  
+                    <apex:outputPanel rendered="{!IF(q.Related_Question__r.Type__c='Radio',true,false)}" id="RadioPanel">            
+                    <div class="Que1">
+                    <apex:outputField value="{!q.Related_Question__r.Question__c}"/>  
+                    <div class="OptionDiv">
+                    <apex:form >
+                    <div style="padding: 20px;">
+                             <apex:selectRadio styleClass="Source" value="{!SelectedValue}" id="RadioButtonValue" onclick="changeValue(this,'{!$Component.RadioButtonValue}',{!count});" >
+                                 <apex:selectOption itemLabel="{!q.Option_One__c}" itemValue="{!q.Option_One__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Two__c}" itemValue="{!q.Option_Two__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Three__c}" itemValue="{!q.Option_Three__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Four__c}" itemValue="{!q.Option_Four__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Five__c}" itemValue="{!q.Option_Five__c}" ></apex:selectOption>
+                              </apex:selectRadio>
+                    </div>
+                    </apex:form>
+                    </div>                       
+                    </div>
+                    </apex:outputPanel>                      
+                    <!-- Question style one -->
+                    
+                    
+                    
+               <apex:outputPanel rendered="{!IF(q.Related_Question__r.Type__c='Multi',true,false)}">            
+                    <div class="Que1">
+                      <apex:outputField value="{!q.Related_Question__r.Question__c}"/>  
+                    <div class="OptionDiv">
+                    <apex:form >
+                    <div style="padding: 20px;">
+                             <apex:SelectCheckboxes value="{!SelectedValue}" id="MultiButtonValue" onclick="changeValue(this,'{!$Component.MultiButtonValue}',{!count});" >
+                                 <apex:selectOption itemLabel="{!q.Option_One__c}" itemValue="{!q.Option_One__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Two__c}" itemValue="{!q.Option_Two__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Three__c}" itemValue="{!q.Option_Three__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Four__c}" itemValue="{!q.Option_Four__c}" ></apex:selectOption>
+                                 <apex:selectOption itemLabel="{!q.Option_Five__c}" itemValue="{!q.Option_Five__c}" ></apex:selectOption>
+                              </apex:SelectCheckboxes>
+                    </div>
+                    </apex:form>
+                    </div>                       
+                    </div>
+                    </apex:outputPanel>
+                       
+                       
+                       
+                       
+                     <!-- Question style two -->  
+                    <apex:outputPanel rendered="{!IF(q.Related_Question__r.Type__c='Slider',true,false)}">           
+                    <div class="Que1">  
+                     <apex:outputLabel value="{!q.Related_Question__r.Question__c}" style="font-weight:bold;" ></apex:outputLabel>
+                     <div class="OptionDiv">
+                    <apex:form >   
+                    <div style="margin-left: 31.5%; padding: 20px;">         
+                            <input type="text" data-slider="true" value="0" data-slider-highlight="true" id="dataSlider" styleClass="textboxslider" alt="{!count}"/>
+                            <apex:inputText style="display:none;" id="hdnField" value="{!SelectedValue}" onchange="changeValue(this,'{!$Component.hdnField}',{!count});"  />
+                    </div>
+                     </apex:form>    
+                     </div>
+                    </div>                      
+                    </apex:outputPanel>
+                    <!-- Question style two -->
+                    
+                    <!-- Question style three -->               
+                    <apex:outputPanel rendered="{!IF(q.Related_Question__r.Type__c='Free-Text',true,false)}">
+                    <div class="Que1">
+                      <apex:outputLabel value="{!q.Related_Question__r.Question__c}" style="font-weight:bold;"></apex:outputLabel>
+                      
+                        <apex:form styleclass="mainForm martop15 marbot30">
+                           <div class="formFeild">
+                           
+                              <div class="feild" style="Border: 2px grey solid;padding: 10px !important;">
+                               <apex:inputTextarea value="{!SelectedValue}" id="FreeTextField" styleClass="textbox" onchange="changeValue(this,'{!$Component.FreeTextField}',{!count});"/>
+                              </div>
+                              
+                            </div>
+                         </apex:form>
+                        
+                     </div>                      
+                     </apex:outputPanel> 
+          <!-- Question style three -->
+               <apex:variable value="{!count+1}" var="count"/> 
+               </apex:repeat>  
+               
+                <div class="Que1 martop15">
+                <apex:form >
+                    <div class="form-group">
+                        <label>Full Name:</label>
+                        <div class="field-outer">
+                           <apex:inputText value="{!fullname}" styleClass="textfield"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <div class="field-outer">
+                            <apex:inputText value="{!email}" styleClass="textfield"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <div class="field-outer">
+                            <apex:inputText value="{!phone}" styleClass="textfield"/>
+                        </div>
+                    </div>
+                    <apex:actionFunction name="InvokeController" action="{!SubmitSurvey}" rerender="view">      
+                             <apex:param id="anode" name="node" value="" />
+                    </apex:actionFunction>
+                     <div class="form-group">
+                     <label></label>
+                     <div class="field-outer">
+                        <apex:commandButton styleClass="green-btn" onclick="SubmitSurvey();" value="Submit" title="Save"/>
+                     
+                     </div>
+                     
+                     </div>
+                    </apex:form>
+                    <!--28 july 2016 end--> 
+                </div>
+                    
+                 </div> 
+             
+                </div>
+        
+            </div>
+        </section>
+<footer class="main-footer">
+<apex:outputLabel value="{!mainobj.Footer_text__c}" styleClass="footer-label"></apex:outputLabel>
+</footer> 
+</div>
+</body>
+</html>
+</apex:page>

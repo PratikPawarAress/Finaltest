@@ -1,0 +1,355 @@
+<apex:page id="thePage" showHeader="false" docType="HTML-5.0"  sidebar="false" standardStylesheets="false" action="{!init}" controller="SurveyBuilder.editOptions" extensions="SurveyBuilder.questionBank">
+    <html>
+         <style>
+            .heading{MARGIN: 0PX; background: #2d3e4e !important;padding: 0 15px !important;
+    height: 40px !important;
+    border: none !important;
+    
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: white !important;
+    text-align: center !important;}</style>
+        <head>
+            <title>Manage Options</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" /> 
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jqueryConfirmstyles, 'jqueryConfirmstyles/jqueryConfirmstyles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jQueryConfirmCss, 'jquery.confirm/jquery.confirm.css')}"/>
+        </head>
+        <body class="manage-options-page">
+           	<div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            <c:topPageNavigation myPageTitle="Manage Options" /> 
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="content-box white-box questionBoxSeparator">
+                        <div class="sectionTitle clear"> Manage Options
+                                       
+                            <apex:outputPanel rendered="{!IF($CurrentPage.parameters.surveyId == null, true, false)}">  
+                                <apex:outputLink value="{!$Page.SurveyBuilder__manageQuestions}"  styleClass="back-btn">
+                                    Go Back
+                                </apex:outputLink>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!IF($CurrentPage.parameters.surveyId != null, true, false)}">  
+                                <apex:outputLink value="{!$Page.SurveyBuilder__createSurveyQuestions}?surveyId={!$CurrentPage.parameters.surveyId}"  styleClass="back-btn">
+                                    Go Back
+                                </apex:outputLink>
+                            </apex:outputPanel>
+                           
+                           
+                      
+                        </div>
+                        <div class="fullwidth">
+                            
+                            
+                            <div class="insideForm">
+                              
+                                <div class="clear">
+                                    <apex:pageMessages />
+                                    <!--<div class="formFeild" id="scoreBlock">
+<label>&nbsp;</label>
+<div class="feild">
+<div id="scoreMsg" class="scoreMsg"></div>
+</div>
+</div>-->
+                                </div>
+                                <div class="clear content-block">
+                                    <div class="sectionTitle1 block-heading">
+                                        <b>Question:</b> {!questionInfo.Question__c }
+                                    </div>
+                                    <p><b>Weightage: {!questionInfo.Weightage__c } </b></p>    
+                                </div>
+                                <div class="container clear content-block no-padding">
+                                    <div class="content-box1 questionBoxSeparator1 questionTopSpacing">
+                                        <apex:outputPanel rendered="{! IF(editID != null,true,false)}">
+                                            <apex:form >
+                                                <div Class="formFeild hideme"> 
+                                                    <div class="feild">
+                                                        <apex:outputPanel styleClass="requiredInput" layout="block">
+                                                            <apex:outputPanel styleClass="requiredBlock" layout="block"/> 
+                                                            <apex:inputText value="{!weightage}" styleclass="weightageValue hideMe" id="editWeightage" html-placeholder="Weightage in number. ex: 10" onblur="checkWeigthageOnEditPage();" />
+                                                        </apex:outputPanel>
+                                                    </div>
+                                                </div>
+                                                <p class="introLine  block-heading txt-left">
+                                                    Add New Options
+                                                </p>
+                                                <div Class="formFeild add_more_label multiselect_add_more_label  radio_add_more_label slider_add_more_label hideMe"> 
+                                                    <!--<label>&nbsp;</label>-->
+                                                    <div class="feild">                                                 
+                                                        <!-- <apex:outputLabel styleClass="add_more_button" value="Add More Options"  /> -->
+                                                        <span class="add_more_button">Add Options</span>
+                                                    </div>
+                                                    <div class="optionBottomSpacing clear edit-option-heading-row" style="WIDTH: 100%; padding: 5px">
+                                                        <input class="heading" disabled="true" type="text" value="Option" style="WIDTH: 71%; "/>
+                                                        <input class="heading" disabled="true" type="text" value="Score" style="WIDTH: 23%;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="formFeild" id="scoreBlock">
+                                                    <label>&nbsp;</label>
+                                                    <div class="feild">
+                                                        <div id="scoreMsg" class="scoreMsg"></div>
+                                                    </div>
+                                                </div>
+                                                <div Class="formFeild hideMe"> 
+                                                   
+                                                    <div class="feild optionContainer options"></div> 
+                                                </div>
+                                                <div id="addmore-bottom">
+                                                    <div Class="formFeild add_more_label multiselect_add_more_label  radio_add_more_label slider_add_more_label hideMe"> 
+                                                        <!--<label>&nbsp;</label>-->
+                                                        <div class="feild">                                                 
+                                                            <!-- <apex:outputLabel styleClass="add_more_button" value="Add More Options"  /> -->
+                                                            <span class="add_more_button">Add Options</span>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                                <apex:inputHidden value="{!selectedOptions}" id="selectedOptions"/> 
+                                                
+                                                <div class="formFeild"> 
+                                                    <label>&nbsp;</label>
+                                                    <div class="feild">                            
+                                                        <apex:commandLink id="addMoreButton" value="Save" action="{!addOptionFromEditOptionsPage}" 
+                                                                          styleClass="green-btn default-btn hideMe"
+                                                                          onClick="return storeValue('{!$Component.selectedOptions}');" >
+                                                            <apex:param name="idToDelete" value="{!editId}" assignTo="{!editId}" />
+                                                            
+                                                            <apex:outputPanel rendered="{!IF($CurrentPage.parameters.surveyId != null, true, false)}">  
+                                                                <apex:param name="surveyId" value="{!$CurrentPage.parameters.surveyId}"  />
+                                                                
+                                                            </apex:outputPanel>
+                                                            
+                                                        </apex:commandLink>
+                                                    </div>
+                                                </div>
+                                            </apex:form>
+                                            <apex:form >
+                                                <div class="formFeild hideMe slider_question_type multiselect_question_type radio_question_type"> 
+                                                    <div class="formBottomFields">
+                                                      
+                                                        <apex:inputText value="{!options}" id="options"
+                                                                        html-placeholder="Option Name" styleClass="questionOptionText" />
+                                                        <!--<apex:inputText value="{!scores}" id="scores"  
+html-placeholder="Option Score" styleClass="scores questionOptionText" onkeypress="return IsNumeric(event);" />-->
+                                                        <div class="select-outer">
+                                                            <apex:selectList value="{!selectScore}" multiselect="false" size="1" styleClass="scores questionOptionText">
+                                                                <apex:selectOptions value="{!scoreOptions}" />
+                                                            </apex:selectList>
+                                                        </div>
+                                                        <apex:image url="{!$Resource.SurveyBuilder__builder_deleteIcon}" styleClass="delete_option" title="Remove"/> 
+                                                    </div>
+                                                </div> 
+                                            </apex:form>
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                <div class="container clear content-block no-padding">
+                                    <div class="white-box1 questionTopSpacing1">
+                                        <apex:outputPanel id="optionContainer" rendered="{! questionDetails.typeOfQuestion__c != 'free_text' }">
+                                            <apex:form rendered="{! hasOptions }" id="previousOption">
+                                                <p class="introLine txt-left block-heading">
+                                                    List Of Options
+                                                </p>
+                                                <div Class="formFeild "> 
+                                                   
+                                                    <div class="feild optionContainer" > 
+                                                        <apex:outputPanel id="fieldOptions">
+                                                            <div class="optionBottomSpacing clear edit-option-heading-row" style="WIDTH: 100%; padding: 5px">
+                                                                <input class="heading" disabled="true" type="text" value="Option" style="WIDTH: 71%; "/>
+                                                                <input class="heading" disabled="true" type="text" value="Score" style="WIDTH: 23%;"/>
+                                                            </div>
+                                                            <apex:repeat value="{!AssignedQuestionOptions}" var="option" id="theRepeat">
+                                                                <div class="optionBottomSpacing clear">
+                                                                    <label class="option-label">Option</label>
+                                                                    <apex:inputText styleClass="questionOptionText" value="{!option.Name}" />
+                                                                    <!--<apex:inputText styleClass="questionOptionText scores updateScores" value="{!option.SurveyBuilder__score__c}" />-->
+                                                                    
+                                                                    <label class="option-label">Score</label>
+                                                                    <div class="select-outer">
+                                                                        <apex:selectList value="{!option.SurveyBuilder__score__c}" styleClass="questionOptionText scores updateScores" size="1" multiselect="false">
+                                                                            <apex:selectOptions value="{!scoreOptions}" />
+                                                                        </apex:selectList>
+                                                                    </div>
+                                                                    <apex:commandLink action="{!deletePreviousOption}" onClick="return confirmDeletion(this);">
+                                                                        <apex:param value="{!option.Id}" name="optionId" assignTo="{!idToDelete}" />
+                                                                        <apex:image title="Delete" styleClass="delete_option" url="{!$Resource.SurveyBuilder__builder_deleteIcon}" />
+                                                                    </apex:commandLink>
+                                                                </div>
+                                                            </apex:repeat>
+                                                        </apex:outputPanel>
+                                                    </div> 
+                                                </div>  
+                                                
+                                                <div Class="formFeild">
+                                                    <apex:commandLink action="{!updateOptions}" value="Update" 
+                                                                      onClick="return updateConfirm();return false;"
+                                                                      styleClass="green-btn default-btn fitlerLeftSpace">
+                                                    </apex:commandLink>
+                                                </div>
+                                                
+                                            </apex:form>
+                                            <apex:outputText rendered="{! hasOptions == false}">
+                                                <div class="clear noRecords">
+                                                    No options assigned
+                                                </div>
+                                            </apex:outputText>
+                                        </apex:outputPanel>
+                                    </div> 
+                                </div> 
+                                <div class="clear">
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+         
+              
+                        </div>
+                        
+                        
+          
+            </section>
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" /> 
+            <apex:includeScript value="{!$Resource.SurveyBuilder__question}"/> 
+            <!-- for jquery alert box -->
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmJs}"/>
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmscript}"/> 
+            
+            <!-- for jquery alert box -->
+            <script>            
+            var globalData =0
+            
+            //confirm before deleting option
+            function confirmDeletion(element){
+                if(window.confirm("Are you sure to delete the option?")){
+                    return true;
+                }
+                return false;
+            }
+            
+            
+            function updateConfirm(){
+                validated = true;
+                $('.updateScores').each(function() {
+                    $(this).removeClass('borderError');        
+                    $(this).addClass('questionOptionText');
+                    if(checkValidScore(this)==false){
+                        validated = false;  
+                        $(this).addClass('borderError');
+                    }else{
+                        $(this).removeClass('borderError');
+                    }
+                });
+                
+                if(!validated)
+                {
+                    $('.confirmM3').css('display','none');  //Hide any success page message if any
+                    showScoreError();
+                }
+                
+                if(chechDefaultOptionEntered()==false)
+                {
+                    removeScoreError();
+                    showScoreError('Please Enter Your Option'); // option data is empty
+                    validated=false;
+                }
+                else                
+                {
+                    validated=true;
+                    removeScoreError();
+                }
+                    
+                return validated;
+            }
+            
+            //Added below to check default option is Empty or not.
+            function chechDefaultOptionEntered()
+            {                
+                for(var i=1 ;i< globalData; i++)
+                {
+                    var val = document.getElementById("op"+i).value;
+                    if(val == '')
+                    {
+                        //alert('val - '+val)
+                        return false;
+                        break;
+                    }                    
+                }
+            }
+            
+            //score validation
+            $(document).ready(function(){
+            
+                $('.scores').each(function(){                
+                    if(parseInt($(this).val()) > parseInt($('#weightage').val()) && parseInt($(this).val()) > 0 ) {
+                        $(this).addClass('borderError');
+                    }else{
+                        $(this).removeClass('borderError');
+                    }
+                });
+                
+                //Added below to add Id for the default option.
+                var currentIndex=1;
+                var x = document.getElementsByClassName("questionOptionText");                
+                var i;
+                for (i = 1; i <= x.length; i++) 
+                {
+                    if(x[i] != undefined && x[i] != null)
+                    {
+                        if(x[i].value!='' && x[i].value!=0)
+                        {
+                            if(i%2==0)
+                            {
+                                x[i].setAttribute("id", "op"+currentIndex);
+                                currentIndex++;
+                                globalData = currentIndex;
+                            }
+                        }
+                    }
+                }
+                /*$('.questionOptionText').each(function() {
+                    //var name = $(this).attr('name');
+                    var val = $(this).val();
+                    alert('val-'+val);
+                    if(val!='' && val!=0)
+                    {                    
+                        var i=1;                        
+                        var name = $(this).attr('name');
+                        
+                    }                    
+                });*/
+            });
+            /* Add Numberic Textbox validation*/          
+             var specialKeys = new Array();
+             specialKeys.push(8); //Backspace
+            function IsNumeric(e) 
+            {                   
+                 var keyCode = e.which ? e.which : e.keyCode
+                 var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);                    
+                 //document.getElementById("error").style.display = ret ? "none" : "inline";
+                 return ret;    
+            }
+            function changeType()
+            {
+                var txtscore = document.getElementsByClassName("scores questionOptionText");
+                if(txtscore!=null)
+                {
+                   for (var i = 0; i < txtscore.length; ++i) 
+                   {
+                       txtscore[i].setAttribute('type', 'number');
+                       txtscore[i].setAttribute('min', '1');
+                   }
+                }
+            }
+            //changeType();
+            </script>
+            
+            <script type="text/javascript" language="javascript"> 
+            //initActions();                                        
+            
+            proceccOptions('{! JSENCODE(HTMLENCODE(questionType))}');
+            </script>
+        </body>
+    </html>
+</apex:page>

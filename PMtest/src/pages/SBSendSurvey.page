@@ -1,0 +1,115 @@
+<apex:page standardController="Feedback_Main__c" extensions="FeedbackMainlistController" sidebar="false" showHeader="false" standardStylesheets="false">
+<apex:form >
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Send Survey</title>
+<apex:stylesheet value="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900"/>
+<apex:stylesheet value="{!$Resource.SurveyMaster}"/>
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"/ >
+<!--<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900" rel="stylesheet" type="text/css">
+<link href="assets/css/master.css" rel="stylesheet">-->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>
+.preview{
+height:26px !important;
+width:26px !important;
+background:url('https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvp&amp;oid=00D36000000jB0z&amp;lastMod=1467952766000');
+background-repeat:no-repeat;
+background-size:cover;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+   
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color:#D6D6D6;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+</style>
+</head>
+<body>
+
+<header class="mainHeader">
+    <div class="container clear">
+        <a href="https://na30.salesforce.com/apex/SBIndex" class="logo"><img src="https://c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001JUKF&oid=00D36000000JqqV&lastMod=1470393353000" alt=""/></a>
+        <div class="nav">
+            <ul>
+                <li><a href="https://na30.salesforce.com/apex/SBIndex" class="home"><img src="https://surveyapp-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001jPvf&oid=00D36000000jB0z&lastMod=1467952727000" alt=""/></a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBQuestionBank">Question Bank</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBCreateSurvey">Create Survey</a></li>
+                <li class="active"><a href="https://na30.salesforce.com/apex/SBSendSurvey">Send Survey</a></li>
+                <li><a href="https://na30.salesforce.com/apex/SBReportPage">Report</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<section class="page-name">
+    <div class="container clear">
+        <h2>Select Survey</h2>
+    </div>
+</section>
+
+<section class="bodyContainer">
+<div class="container clear">
+<apex:pageBlock >
+
+    <apex:pageBlockTable value="{!feed}" var="fd" styleClass="defaultTable" style="width: 100%;">
+    
+        <apex:column headerValue="Code" colspan="2">
+            <apex:outputField value="{!fd.Name}" />
+        </apex:column>
+        <apex:column headerValue="Name" colspan="4">
+            <apex:outputField value="{!fd.Feedback_Name__c}" />
+        </apex:column>
+        
+        <apex:column headerValue="Preview" styleClass="action-links">
+        <div class="tooltip">
+            <apex:outputLink value="https://na30.salesforce.com/apex/SBSendDisplay?id={!fd.id}"><apex:image url="https://c.na30.content.force.com/servlet/servlet.ImageServer?id=01536000001JUKF&oid=00D36000000JqqV&lastMod=1470393353000" style="padding-left:20px;"/></apex:outputLink>
+            <span class="tooltiptext">Preview your survey</span>
+        </div>
+        </apex:column>
+        
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</div>
+</section>
+
+<footer class="main-footer" style="margin-top: 38px;">
+    <ul>
+        <li> <a href="#">Privacy Policy</a> </li>
+        <li><a href="#">Terms of Services</a></li>
+    </ul>
+    <div class="copyright">© 2016 Survey Builder, All rights reserved. </div>
+</footer> 
+
+</body>
+</html>
+</apex:form>
+</apex:page>

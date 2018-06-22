@@ -1,0 +1,1097 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+
+<html class="no-js csstransforms no-csstransforms3d csstransitions">
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Aress, in partnership with Salesforce.com, has a micro-niche, razor focused Salesforce team of certified developers and consultants. Our Salesforce practice can help you with all your consulting, implementation and support service requirements with Salesforce, the worlds most trusted Customer Success Platform. Please view our Salesforce Video for further information."/>
+<meta name="title" content="Salesforce Consulting, App development and Integration - Aress"/>
+<meta name="keywords" content="salesforce implementation, consulting services,  development, mobile application, salesforce UK, mobile sales force, sales force tool, crm sales force automation, sales force strategy, sales force organization, forced sale, online sales force, building a sales force, sales force 1, sales force one, sales force online, sales force technology, sales force solutions, sales force marketing, sales force alternative, crm sales force, sales force program, sales force activities, sales force app, the sales force, sales force mobile, sale forces, global sales force, sales force partners, marketing sales force, sales force reports, outside sales force, effective sales force, sales force company, cost of sales force, sales force inc, company sales force, sales force team, sales force prices, sales force video, sales force demo video, salesforce, sales force, sales force uk, sales force application, sales force applications, sales force cost, sales force development, sales force trial, sales force website"/>
+<title>Salesforce Consulting, App development and Integration - Aress</title>
+
+<link href="https://fonts.googleapis.com/css?family=Lato:400,300,700" rel="stylesheet" type="text/css"/>
+
+
+<!--<apex:stylesheet value="{!$Resource.BootstrapCSS}"/>-->
+
+<!--<apex:stylesheet value="{!$Resource.fontawesomeSFSupport}"/>-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+<apex:stylesheet value="{!$Resource.animateSFSupport}"/>
+<apex:stylesheet value="{!$Resource.bootstrapSFSupport}"/>
+<apex:stylesheet value="{!$Resource.masterSalesforceSupport}"/>
+<apex:stylesheet value="{!$Resource.parallaxSFSupport}"/>
+
+
+ <!--[if lt IE 9]>
+<apex:includeScript value="{!URLFOR($Resource.jsSFSupport, '/js/html5shiv.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.jsSFSupport, '/js/respond.min.js')}"/>
+ <![endif]-->
+ 
+
+
+
+<!--<apex:includeScript value="{!URLFOR($Resource.jsSFSupport, '/js/parallax/jquery.scrollTo-1.4.2-min.js')}"/>-->
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+<!--<apex:includeScript value="{!$Resource.jquerybxsliderJS}"/>
+<apex:stylesheet value="{!$Resource.jqurybxslidercss}"/>-->
+
+<!-- Fancy box -->  
+
+<!--<apex:includeScript value="{!$Resource.jqueryvalidateminJS}"/>
+<apex:includeScript value="{!$Resource.RequestquotevalidateJs}"/>-->
+
+<!--<apex:includeScript value="{!$Resource.crawlerJS}"/>-->
+
+
+<!--<script>
+function validateForm() {
+var x= document.forms["enquiryFrm"]["YPL"].value;
+if (x == null || x == "" || x == "Please select") {
+alert("Please Select Value");
+return false;
+}
+}
+</script>-->
+
+
+
+
+
+
+
+
+<!--<apex:includeScript value="{!$Resource.SMKAccordingJS}"/>-->
+<!--<apex:includeScript value="{!$Resource.customJS}"/>-->
+ 
+
+
+
+
+
+
+
+</head>
+
+
+<body>
+        <!-- Return to Top -->
+        <a href="javascript:" id="return-to-top">
+            <i class="fa fa-chevron-up" aria-hidden="true"></i>
+        </a>
+        <div id="page-top"> </div>
+        <div class="phone-strip phone-strip-desktop">
+            <ul>
+                <li>
+                    <a class="usa-flag" href="tel:(404)369-6045">(404) 369-6045 </a> 
+                </li>
+                <li>
+                    <a class="uk-flag" href="tel:+44(0)7828929032"><span>+44 (0) 7828 929032 </span></a>
+                </li>
+                <li>
+                    <a class="india-flag" href="tel:+91(253)6630710"><span>+91 253 6630710 </span></a>
+                </li>
+                <li>
+                    <a class="uk-flag" href="tel:08008654868"><strong>Toll Free: </strong><span>0800 865 4868</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <header class="main-header">
+            <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="icon-bar"> </span>
+                            <span class="icon-bar"> </span>
+                            <span class="icon-bar"> </span>
+                        </button>
+                        <a class="navbar-brand page-scroll" href="#page-top">
+                            <img src="{!$Resource.logoSFSupport}" alt="logo"/>
+                            
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active">
+                                <a class="page-scroll" href="#home">Home</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#packages">Packages </a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#aboutus">About us</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="#features">Features</a>
+                            </li>                            
+                            <li>
+                                <a class="page-scroll" href="#customers">Customers</a>
+                            </li>                     
+                            <li>
+                                <a class="page-scroll" href="#contactus">Contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </header>
+
+        <div class="phone-strip phone-strip-mobile">
+            <ul>
+                <li>
+                    <a class="usa-flag" href="tel:(404)369-6045">(404) 369-6045</a> 
+                </li>
+                <li>
+                    <a class="uk-flag" href="tel:+44(0)7828929032"><span>+44 (0) 7828 929032</span></a>
+                </li>
+                <li class="mobile-divider">&nbsp;</li>
+                <li>
+                    <a class="india-flag" href="tel:+91(253)6630710"><span>+91 253 6630710</span></a>
+                </li>
+                <li>
+                    <a class="uk-flag" href="tel:08008654868"><strong>Toll Free: </strong><span>0800 865 4868</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="intro">
+            <!--home section-->
+            <section id="home">
+                <div class="masthead wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Signup with us <span>and</span> relax!</h2>
+                                <h3>Reliable Salesforce Support Solutions to Fit Your Requirements</h3>
+                                <a href="#contactus" class="btn page-scroll">CONTACT US</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--packages-->
+            <section id="packages">
+                <div class="container">
+                    <!-- price table-->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="section-title">
+                                Packages
+                            </h2>
+                            <div class="price-table clearfix">
+                                <div class="choose-plan choose-plan-desktop wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="200ms">
+                                    <div class="col-header">
+                                        <h3>Choose <br>Your Plan</br></h3>
+                                    </div>
+                                    <div class="col-body">
+                                        <ul>
+                                            <li class="first-item">Number of SF users (Recommended)</li>
+                                            <li>24x7 Support</li>
+                                            <li>Monthly Hours</li>
+                                            <li>Training</li>  
+                                        </ul>
+                                    </div> 
+                                    <div class="col-footer">&nbsp;</div>
+                                </div>
+                                <!--basic-->
+
+                                <div class="plan-col basic-plan wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="400ms">
+                                    <div class="plan-header">
+                                        <div class="plan-title">
+                                            <h3>Basic</h3>
+                                        </div>
+                                        <div class="plan-price">
+                                            <h4>$300<span>/month</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-body">
+                                        <ul>
+                                            <li class="choose-plan-mobile">Number of SF users (Recommended)</li>
+                                            <li class="first-item"><p>1-10</p></li>
+                                            <li class="choose-plan-mobile">24x7 Support</li>
+                                            <li><p>Helpdesk</p></li>
+                                            <li class="choose-plan-mobile">Monthly Hours</li>
+                                            <li><p>15</p></li>
+                                            <li class="choose-plan-mobile">Training</li>
+                                            <li><p>--</p></li>  
+                                        </ul>
+                                    </div> 
+                                    <div class="col-footer">
+                                        <p>Paid Annually</p>
+                                        <a href="#contactus" class="btn page-scroll">Contact Us</a>
+                                    </div>
+                                </div>
+                                <!--Standard-->
+
+                                <div class="plan-col standard-plan wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                    <div class="plan-header">
+                                        <div class="plan-title">
+                                            <h3>Standard</h3>
+                                        </div>
+                                        <div class="plan-price">
+                                            <h4>$800<span>/month</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-body">
+                                        <ul>
+                                            <li class="choose-plan-mobile">Number of SF users (Recommended)</li>
+                                            <li class="first-item"><p>11-50</p></li>
+                                            <li class="choose-plan-mobile">24x7 Support</li>
+                                            <li><p>Helpdesk &amp; Live Chats</p></li>
+                                            <li class="choose-plan-mobile">Monthly Hours</li>
+                                            <li><p>40</p></li>
+                                            <li class="choose-plan-mobile">Training</li>
+                                            <li><p>--</p></li>  
+                                        </ul>
+                                    </div> 
+                                    <div class="col-footer">
+                                        <p>Paid Annually</p>
+                                        <a href="#contactus" class="btn page-scroll">Contact Us</a>
+                                    </div>
+                                </div>
+                                <!--premium-->
+
+                                <div class="plan-col premium-plan wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="800ms">
+                                    <div class="plan-header">
+                                        <div class="plan-title">
+                                            <h3>Premium</h3>
+                                        </div>
+                                        <div class="plan-price">
+                                            <h4>$1500<span>/month</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-body">
+                                        <ul>
+                                            <li class="choose-plan-mobile">Number of SF users (Recommended)</li>
+                                            <li class="first-item"><p>51-100</p></li>
+                                            <li class="choose-plan-mobile">24x7 Support</li>
+                                            <li><p>Helpdesk , Live Chats &amp; Voice</p></li>
+                                            <li class="choose-plan-mobile">Monthly Hours</li>
+                                            <li><p>75</p></li>
+                                            <li class="choose-plan-mobile">Training</li>
+                                            <li><p>8 hours</p></li>  
+                                        </ul>
+                                    </div> 
+                                    <div class="col-footer">
+                                        <p>Paid Monthly</p>
+                                        <a href="#contactus" class="btn page-scroll">Contact Us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--packages features-->
+                <div class="package-features clearfix">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2 class="section-title wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">Our Salesforce Support packages include</h2>
+                                <div class="package-features-content">
+                                    <ul>
+                                        <li class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                            <div class="features-box">
+                                                <div class="features-icon">
+                                                    <div class="icon-inner">
+                                                        <i class="fa fa-shield" aria-hidden="true"></i>  
+                                                    </div>
+                                                </div>
+                                                <h3>SECURITY MANAGEMENT</h3>
+                                                <p>Organization wide default, profiles, roles, field level security, sharing rules, public groups</p>
+                                            </div>
+                                        </li>
+                                        <li class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                            <div class="features-box">
+                                                <div class="features-icon">
+                                                    <div class="icon-inner">
+                                                        <i class="fa fa-cogs" aria-hidden="true"></i>  
+                                                    </div>
+                                                </div>
+                                                <h3>OBJECT LEVEL
+                                                    CONFIGURATIONS</h3>
+                                                <p>Object, tab, views, fields,
+                                                    page layouts, record
+                                                    types, custom links, <br>
+                                                    buttons</br></p>
+                                            </div>
+                                        </li>
+                                        <li class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
+                                            <div class="features-box">
+                                                <div class="features-icon">
+                                                    <div class="icon-inner">
+                                                        <i class="fa fa-cloud" aria-hidden="true"></i>  
+                                                    </div>
+                                                </div>
+                                                <h3>SALESFORCE BUILT-IN
+                                                    AUTOMATIONS</h3>
+                                                <p>Validation rules, workflow
+                                                    rules, formula fields,
+                                                    approval, email templates</p>
+                                            </div>
+                                        </li>
+                                        <li class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms">
+                                            <div class="features-box">
+                                                <div class="features-icon">
+                                                    <div class="icon-inner">
+                                                        <i class="fa fa-database" aria-hidden="true"></i>  
+                                                    </div>
+                                                </div>
+                                                <h3>DATA<br>
+                                                    MANAGEMENT</br></h3>
+                                                <p>Sandbox refresh, data
+                                                    migration and updation,
+                                                    translation workbench</p>
+                                            </div>
+                                        </li>
+                                        <li class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1500ms">
+                                            <div class="features-box">
+                                                <div class="features-icon">
+                                                    <div class="icon-inner">
+                                                        <i class="fa fa-dashboard" aria-hidden="true"></i>  
+                                                    </div>
+                                                </div>
+                                                <h3>REPORTS,
+                                                    DASHBOARDS</h3>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li class="wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1800ms">
+                                            <div class="features-box">
+                                                <div class="features-icon">
+                                                    <div class="icon-inner">
+                                                        <i class="fa fa-wrench" aria-hidden="true"></i>  
+                                                    </div>
+                                                </div>
+                                                <h3>OTHER <br>
+                                                    CONFIGURATIONS ITEMS</br></h3>
+                                                <p></p>
+                                            </div>
+                                        </li>  
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div> 
+        <!--aboutus-->
+        <section id="aboutus">
+            <div class="clearfix">
+                <div class="aboutus-section ">
+                    <div class="aboutus-content wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms" >
+                        <h2 class="section-title">
+                            About us
+                        </h2>
+                        <p>Aress has profound experience in providing dependable support to business IT
+                            applications. Over the past several years we have learnt and streamlined our processes,
+                            technology and people skills to provide our partners with seamless integrated
+                            environment for incident Management, Problem Management, Release Management,
+                            Change Management and Service Level Management. We also provide specialized
+                            technology and resources for supporting salesforce production environments, including
+                            activities such as marketing, reports, mobile and app development.</p>
+                        <p><strong>To establish a well-managed Salesforce, you want to work with someone who is an
+                                expert on Salesforce and who knows how to perform all the common Salesforce
+                                administrator tasks, including:</strong>
+                        </p>
+                        <ul class="arrow-bullet">
+                            <li>Creating and modifying reports and dashboards</li>
+                            <li>Creating and modifying workflow automation and flows/processes</li>
+                            <li>Managing users and troubleshooting Salesforce errors</li>
+                            <li>Making changes and updates to page layouts and custom fields</li>
+                            <li>Manipulating and reformatting data</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="whychoose-section">
+                    <div class="whychoose-content wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h2 class="section-title">Why choose us</h2>
+                        <ul class="tick-bullet">
+                            <li>3 years, 40+ Salesforce developers</li>
+                            <li> Agile and dedicated development teams</li>
+                            <li>ISO certified</li>
+                            <li>Expertise across technologies</li>
+                            <li>Experienced SCRUM/PMP professionals</li>
+                            <li>A Silver Consulting Partner with <a href="https://www.salesforce.com" target="_blank">Salesforce.com</a></li>
+                        </ul>
+                        <p><strong>
+                                Managing Salesforce requires a thorough
+                                knowledge of Salesforce, and outsourcing <br>
+                                to a <a href="https://www.salesforce.com" target="_blank">salesforce.com</a> partner like </br>
+                                Aress Software makes it easy.
+                            </strong>
+                        </p>
+                        <img src="{!$Resource.silverconsultingpartnerSFSupport}" class="partner-logo" alt="Silver consulting partner"/>
+                    </div>
+                </div>
+            </div>
+
+            <!--salesforce-services-->
+            <div class="salesforce-services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-4 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <h2 class="section-title">
+                                Future of Your
+                                Digital Business
+                                Transformation <br/>
+                                Is Here. 
+                            </h2>
+                            <p>We offer salesforce support services <br/>
+                                that enable clients to complete their <br/>
+                                success journey with a structured <br/>
+                                roadmap and clear vision.</p>
+                        </div>
+                        <div class="col-sm-12 col-md-8 col-lg-8 info-graphic wow bounceIn animation-visible animated">
+                            <img src="{!$Resource.infographicSFSupport}" alt="image" /> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--features-->
+        <section id="features">
+            <h2 class="section-title">
+                Features
+            </h2>
+            <div class="features-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-heading-mobile">Configuration and Data Migration</div>
+                            <div class="configuration-table">
+                                <table class="dotted-line">
+                                    <thead>
+                                        <tr>
+                                            <th class="featurs-heading">Configuration and Data Migration </th>
+                                            <th>Basic</th>
+                                            <th>Standard</th>
+                                            <th>Premium</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>User Management</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Security Management</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Salesforce Automation</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reports and Dashboards</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Configurations Changes</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Template Support</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Feature Activation Requests </td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Data management (Data Migration and Update)</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="table-heading-mobile">Customization and
+                                Integration</div>
+                            <div class="customization-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="featurs-heading">Customization and
+                                                Integration</th>
+                                            <th>Basic </th>
+                                            <th>Standard </th>                                
+                                            <th>Premium</th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>AppExchange packages- Installation, management and removal</td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>   
+                                        </tr>
+                                        <tr>
+                                            <td>Troubleshooting in Apex, and Triggers</td>
+                                            <td><i class="fa" aria-hidden="true">--</i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>   
+                                        </tr>                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="table-heading-mobile">Advanced Integration</div>
+                            <div class="advanced-integration-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="featurs-heading">Advanced Integration</th>
+                                            <th>Basic </th>
+                                            <th>Standard </th>                                
+                                            <th>Premium</th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="webservices">Webservices and API 
+                                            </td>
+                                            <td><i class="fa" aria-hidden="true">--</i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>   
+                                        </tr>
+                                        <tr>
+                                            <td>Google Apps (Setup, User Management and configuration)</td>
+                                            <td><i class="fa" aria-hidden="true">--</i></td>
+                                            <td><i class="fa" aria-hidden="true">--</i></td>
+                                            <td><i class="fa fa-check" aria-hidden="true"></i></td>   
+                                        </tr>                                        
+                                    </tbody>
+                                </table>                            
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--customers-->
+        <section id="customers">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="section-title">Our Customers are worldwide</h2>
+                        <h3>Reliability, Quality &amp; Peace of mind - Delivered. <span>No matter what the address is.</span></h3>
+                        <p class="small visible-lg" >Hover at the ends to Rewind/Fast-forward, in the center to stop</p>
+                        <div class="crawler-outer">
+                            <div class="marquee" id="mycrawler1">
+                                <!--<img src="assets/images/client/client-logo-1.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-2.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-3.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-4.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-5.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-6.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-7.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-8.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-9.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-10.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-11.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-12.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-13.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-14.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-15.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-16.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-17.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-18.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-19.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-20.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-21.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-22.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-23.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-24.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-25.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-26.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-27.png" alt="img"/>
+                                <img src="assets/images/client/client-logo-28.png" alt="img"/>-->
+                                
+                                 <apex:image value="{!$Resource.logo1}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo2}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo3}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo4}" alt="img"/>                 
+             <apex:image value="{!$Resource.clientLogo5}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo6}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo7}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo8}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo9}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo10}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo11}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo12}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo13}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo14}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo15}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo16}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo17}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo18}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo19}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo20}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo21}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo22}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo23}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo24}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo25}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo26}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo27}" alt="img"/>
+             <apex:image value="{!$Resource.clientLogo28}" alt="img"/>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--contactus-->
+        <section id="contactus">
+            <div class="contactus-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="section-title">contact us</h2>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-7 col-lg-7 address-section">
+                                    <div class="india-office clearfix">
+                                        <h3 class="country-title india">
+                                            INDIA
+                                        </h3>
+                                        <div>
+                                            <div class="pune-office">
+                                                <h4>PUNE</h4>
+                                                <ul>
+                                                    <li>
+                                                        <div class="address-label"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                            Address:</div>
+                                                        <div class="address-value">
+                                                            <p>Amanora Chambers – East,<br/>
+                                                                <span>"Amanora Town Centre",</span><br/>
+                                                                <span class="inline-block">Office No. 318,</span> C-3 Level, Hadapsar,<br/>
+                                                                Pune - 411 028, India</p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="address-label"><i class="fa fa-phone" aria-hidden="true"></i>
+                                                            Tel:</div>
+                                                        <div class="address-value">
+                                                            <p><span class="inline-block">+91 20 69001210</span><br/>
+                                                                <span class="inline-block"> +91 20 69001211</span></p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="address-label"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                                            Email:</div>
+                                                        <div class="address-value">
+                                                            <p><a href="mailto:info@aress.com">info@aress.com</a></p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="nashik-office">
+                                                <h4>Nashik</h4>
+                                                <ul>
+                                                    <li>
+                                                        <div class="address-label"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                            Address</div>
+                                                        <div class="address-value">
+                                                            <p>L-13, MIDC Ambad, <br/>
+                                                                 <span class="inline-block">Nashik - 422 010,</span> India</p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="address-label"><i class="fa fa-phone" aria-hidden="true"></i>
+                                                            Tel:</div>
+                                                        <div class="address-value">
+                                                            <p>
+                                                                <span class="inline-block">+91 253 6630710</span> <br/>
+                                                                <span class="inline-block">+91 253 6630708</span><br/>
+                                                                <span class="inline-block">+91 253 6630701</span><br/>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="address-label"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                                            Email:</div>
+                                                        <div class="address-value">
+                                                            <p><a href="mailto:info@aress.com">info@aress.com</a></p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="address-line clearfix">&nbsp;</div>
+                                    <div class="uk-office">
+                                        <h3 class="country-title uk">
+                                            UK
+                                        </h3>
+                                        <ul>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    Address</div>
+                                                <div class="address-value">
+                                                    <p>14 Duke Street, Chester, Cheshire, CH1 1RP </p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-phone" aria-hidden="true"></i>
+                                                    Tel:</div>
+                                                <div class="address-value">
+                                                    <p>+44 (0) 1244 403 421</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-mobile" aria-hidden="true"></i>
+
+                                                    Mob:</div>
+                                                <div class="address-value">
+                                                    <p>+44 (0) 7828 929 032</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                                    Email:</div>
+                                                <div class="address-value">
+                                                    <p><a href="mailto:alan.acton@aress.com">alan.acton@aress.com</a></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="address-line clearfix">&nbsp;</div>
+                                    <div class="usa-office">
+                                        <h3 class="country-title usa">
+                                            USA
+                                        </h3>
+                                        <ul>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    Address:</div>
+                                                <div class="address-value">
+                                                    <p>702 Countryside PL SE, Smyrna, <span class="inline-block">GA 30080</span></p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-phone" aria-hidden="true"></i>
+                                                    Tel:</div>
+                                                <div class="address-value">
+                                                    <p>(404) 369-6045</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="address-label"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    Email:</div>
+                                                <div class="address-value">
+                                                    <p><a href="mailto:orvin.moore@aress.com">orvin.moore@aress.com</a></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-5 col-lg-5">
+                                    <div class="contact-form">
+                                        <!--<form>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Phone Number">
+                                                </div>        
+                                                <div class="row">
+                                                    <div class="col-sm-6 select-location">
+                                                        <div class="form-group">
+                                                            <select class="form-control">
+                                                                <option value="Preferred location">Preferred location</option>
+                                                                <option value="Nashik">Nashik</option>
+                                                                <option value="Pune">Pune</option>
+                                                            </select>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="col-sm-6 select-plan">
+                                                        <div class="form-group">
+                                                            <select class="form-control">
+                                                                <option  value="Choose your Plan">Choose your Plan</option>
+                                                                <option value="Basic">Basic</option>
+                                                                <option value="Premium">Premium</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" placeholder="Message"></textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-7">
+                                                        <div class="form-group">
+                                                            <input  class="form-control" type="text" placeholder="Please enter the characters">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn" value="Submit">
+                                                </div>
+                                            </form>-->
+
+                                        <!--new form-->
+                                        <div class="nilesh">
+                                            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+                                                <input type="hidden" name="oid" value="00D36000000JqqV"/>
+                                                <input type="hidden" name="retURL" value="http://aress.com/thank-you.html#"/>
+
+                                                <div class="form-group">
+                                                    <input id="first_name" class="form-control" placeholder="First Name" maxlength="40" name="first_name" size="20" type="text" required="true" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input id="last_name" maxlength="80" class="form-control" placeholder="Last Name" name="last_name" size="20" type="text" required="true" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input id="email" maxlength="80" class="form-control" placeholder="Email"  name="email" size="20" type="text" required="true" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input id="phone" maxlength="40" class="form-control" placeholder="Phone Number" name="phone" size="20" type="text" required="true" />
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <input id="company" maxlength="40" class="form-control" placeholder="Company" name="company" size="20" type="text" required="true" />
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6 select-location">
+                                                        <div class="form-group">
+                                                            <div class="select-outer">
+                                                                <select class="form-control" id="00N3600000NxhqK" name="00N3600000NxhqK" title="Your Preffered Location" required="true">
+                                                                    <option>Preferred location</option>
+                                                                    <option value="USA">USA</option>
+                                                                    <option value="UK">UK</option>
+                                                                    <option value="India">India</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 select-plan">
+                                                        <div class="form-group">
+                                                            <div class="select-outer">
+                                                                <select id="00N3600000SYL0w" class="form-control" name="00N3600000SYL0w" title="Choose your Plan" required="true">
+                                                                    <option value="">Choose your Plan</option>
+                                                                    <option value="Basic">Basic</option>
+                                                                    <option value="Standard">Standard</option>
+                                                                    <option value="Premium">Premium</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea id="00N3600000NxgH9" class="form-control" placeholder="Message" name="00N3600000NxgH9" rows="3" 
+                                                              type="text" required="true" wrap="soft"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" value="Submit" class="btn" name="submit"/>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                        <!--new form end-->
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--strategic partner-->
+            <div class="strategic-partners">
+                <div class="container">
+                    <div class="partner-txt">
+                        <p>STRATEGIC PARTNERS</p>
+                    </div>
+                    <div class="partners">
+                        <ul>
+                            <!--<li><img src="assets/images/partner/partnerimg8.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/microsoftlogo.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/partnerimg3.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/partnerimg4.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/partnerimg5.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/partnerimg6.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/partnerimg7.png" alt="img"/></li>
+                            <li><img src="assets/images/partner/nass.png" alt="img"/></li>-->
+                            
+                            <!--<li><img src="http://aress.com/images/partnerimg8.png" alt="img"/></li>-->
+            <li><apex:image value="{!$Resource.SilverPartnering8}" alt="img"/></li>
+            <li><apex:image value="{!$Resource.MicrosoftLogo}" alt="img"/></li>
+            <li><apex:image value="{!$Resource.drupalAssociation}" alt="img"/></li>
+           <li><apex:image value="{!$Resource.MicrosoftbusinessLogo}" alt="img"/></li>            
+            <li><img src="http://aress.com/images/partnerimg5.png" alt="img"/></li>
+            <li><img src="http://aress.com/images/partnerimg6.png" alt="img"/></li>
+            <li><img src="http://aress.com/images/partnerimg7.png" alt="img"/></li>
+               <li><apex:image value="{!$Resource.nasscomSFSupport}" alt="img"/></li>              
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <!--footer-->
+            <footer class="main-footer">
+                <ul class="social-media">
+                    <li class="linkedin"><a href="http://www.linkedin.com/company/aress-software?trk=company_name" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="twitter"><a href="https://twitter.com/aress_software" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li class="google-plus"><a href="https://plus.google.com/u/0/108835875638213593796" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li class="facebook"><a href="https://www.facebook.com/pages/Aress-Software-and-Education-Technologies-Pvt-Ltd/177195192308646" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                </ul>
+                <div class="copyright">
+                    <p>&copy; {!year(today())} Aress Software &amp; Education Technologies (P) Ltd. <span class="inline-block">All rights reserved.</span> </p>
+                </div>
+            </footer>
+        </section>
+
+        <!-- jQuery -->
+       
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#nav').localScroll(800);
+
+                //.parallax(xPosition, speedFactor, outerHeight) options:
+                //xPosition - Horizontal position of the element
+                //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+                //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+                $('#intro').parallax("50%", 0.1);
+
+            })
+        </script>
+            
+       <script  src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/jquery.min.js')}"></script>
+       <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/bootstrap.js')}"></script>
+
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/jquery-easing/jquery.easing.min.js')}"></script>
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/scrollreveal/scrollreveal.min.js')}"></script>
+
+
+        <!--<apex:includeScript value="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/animate/wow.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/crawler.js')}"/>-->
+
+
+
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/parallax/jquery.parallax-1.1.3.js')}"></script>
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/parallax/jquery.localscroll-1.2.7-min.js')}"></script>
+        
+        
+        <!-- animation JavaScript-->
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/animate/wow.min.js')}"></script>
+        <!--crawler script-->
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/crawler.js')}"></script>
+        <script src="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/custom/custom.min.js')}"></script>
+        <!-- goto top script-->
+        <script type="text/javascript">
+            // JavaScript Document
+            jQuery(function ($) {
+                //Initiat WOW JS
+                new WOW().init();
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('.scrollup').fadeIn();
+                    } else {
+                        $('.scrollup').fadeOut();
+                    }
+                });
+                $('.scrollup').click(function () {
+                    $("html, body").animate({scrollTop: 0}, 1000);
+                    return false;
+                });
+
+            });
+            // ===== Scroll to Top ==== 
+            $(window).scroll(function () {
+                if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                    $('#return-to-top').fadeIn(200);    // Fade in the arrow
+                } else {
+                    $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+                }
+            });
+            $('#return-to-top').click(function () {      // When arrow is clicked
+                $('body,html').animate({
+                    scrollTop: 0                       // Scroll to top of body
+                }, 500);
+            });
+
+        </script>
+
+        <script type="text/javascript">
+            marqueeInit({
+                uniqueid: 'mycrawler1',
+                style: {
+                    'padding': '0'
+                },
+                inc: 5, //speed - pixel increment for each iteration of this marquee's movement
+                mouse: 'cursor driven', //mouseover behavior ('pause' 'cursor driven' or false)
+                moveatleast: 2,
+                neutral: 150,
+                savedirection: true,
+                random: true
+            });
+        </script>
+        <script>
+            var s = document.createElement("script");
+
+            if (window.innerWidth < 1280) {
+                $('link[href="assets/css/animate.css"]').prop("disabled", true);
+            }
+
+
+        </script>
+        <!--<apex:includeScript value="{!URLFOR($Resource.jsSFSupport, '/jsSFSupport/js/custom/custom.min.js')}"/>-->
+    </body>
+</html>
+</apex:page>

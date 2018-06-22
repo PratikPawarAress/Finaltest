@@ -1,0 +1,130 @@
+<apex:page sidebar="false" showHeader="false" docType="HTML-5.0" controller="SurveyBuilder.CreateSurvey" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="false">
+    <html>
+        <head>
+            <title>Create Survey</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+            <apex:includeScript value="{!$Resource.SurveyBuilder__JQueryMinified}"/> 
+            <apex:includeScript value="{!$Resource.SurveyBuilder__JQueryUIminified}"/>
+            <apex:stylesheet value="{!$Resource.SurveyBuilder__JQueryCSS}"/> 
+            <script>
+            $(document).ready(function(){
+                $( function() {
+                    $( "[id$=datepicker]" ).datepicker();
+                } );
+            });
+            </script>   
+        </head>    
+        <body class="create-survey-page">
+            <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" />
+            <c:topPageNavigation myPageTitle="Create New Survey" />
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="white-box">
+                         
+                         <div class="top-btn-outer clear">
+                            <apex:outputLink value="{!$Page.SurveyBuilder__surveyList}"  styleClass="green-btn default-btn">
+                                Go to Manage Survey
+                            </apex:outputLink>
+                        </div>
+                        
+                        <c:surveyTabs surveyId="{!surveyId}" />
+                        <div class="form-box-outer clear">
+                            
+                       
+                        <div class="sectionTitle"> Create New Survey</div>  
+                        
+                        <apex:pageMessages />
+                        <div class="fullwidth form-box-inner">
+                            
+                        
+                        <apex:form styleClass="mainForm clear" id="theForm">
+                            <div class="formFeild" id="formFeild">
+                                <label>Title</label>
+                                <div class="feild">
+                                    <apex:outputPanel styleClass="requiredInput" id="sname" layout="block">
+                                        <apex:inputText value="{!surveyName}" 
+                                        id="theFieldInput"  html-placeholder="Enter Title for the survey" 
+                                        required="true" maxlength="80"/>
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="formFeild">
+                                <label>Description</label>
+                                <div class="feild">
+                                    <apex:inputTextarea value="{!Description}" html-placeholder="Description"  styleClass="text-editor" html-maxlength="255" />
+                                </div>
+                            </div>
+                            <!--<div class="formFeild qs">
+                                <label>Is Active</label>
+                                <div class="feild">
+                                    <apex:inputCheckbox value="{!surveyStatus}" /> 
+                                </div>
+                            </div>-->
+                            <div class="formFeild">
+                                <label>Expiration Period (In Days)</label>
+                                <div class="feild expiration-period">
+                                    <apex:input type="number"  html-min="1"  value="{!expirationPeriod}" html-placeholder="Enter days"/>
+                                     <apex:outputPanel rendered="{!IF($ObjectType.SurveyBuilder__Survey__c.Fields.SurveyBuilder__expirationPeriod__c.inlineHelpText == null, false, true)}">  
+                                      <div class="tooltip" style="float:none !important;">
+                                           <img src="https://surveybuilder.na3.visual.force.com/resource/1490095190000/SurveyBuilder__help" Class="helpIcon"   style="display:inline-block !important;"  />
+                                          <span class="tooltiptext">{!$ObjectType.survey__c.Fields.expirationPeriod__c.inlineHelpText}</span>
+                                      </div>
+                                     </apex:outputPanel>
+                                </div>
+                            </div>
+                           <!--<div class="formFeild">
+                                <label>Select day </label>
+                                <div class="feild">
+                                <apex:selectList styleclass="feild chooseDay" style="width:auto !important;" id="chooseDay" value="{!selectedDay}" size="1">
+                                    <apex:selectOption itemValue="Select" itemLabel="Select"/>
+                                    <apex:selectOption itemValue="Sunday" itemLabel="Sunday"/>
+                                    <apex:selectOption itemValue="Monday" itemLabel="Monday"/>
+                                    <apex:selectOption itemValue="Tuesday" itemLabel="Tuesday"/>
+                                    <apex:selectOption itemValue="Wednesday" itemLabel="Wednesday"/>
+                                    <apex:selectOption itemValue="Thursday" itemLabel="Thursday"/>
+                                    <apex:selectOption itemValue="Friday" itemLabel="Friday"/>
+                                     <apex:selectOption itemValue="Saturday" itemLabel="Saturday"/>
+                                </apex:selectList>
+                                <apex:outputPanel rendered="{!IF($ObjectType.Survey__c.Fields.DayforCycle__c.inlineHelpText == null, false, true)}">  
+                                      <div class="tooltip" style="margin:13px;">
+                                           <img src="/s.gif" Class="helpIcon"   style="display:inline-block !important;"  />
+                                          <span class="tooltiptext" >{!$ObjectType.survey__c.Fields.DayforCycle__c.inlineHelpText}</span>
+                                      </div>
+                                       
+                                </apex:outputPanel>
+                                    
+                                </div>
+                            </div>-->
+                             <div class="formFeild">
+                                <label>Select send date </label>
+                                <div class="feild select-date">
+                                	<apex:inputtext id="datepicker" value="{!dateToSend}"/>
+                                    <apex:outputPanel rendered="{!IF($ObjectType.SurveyBuilder__Survey__c.Fields.SurveyBuilder__dateToSendSurvey__c.inlineHelpText == null, false, true)}">  
+                                      <div class="tooltip">
+                                           <img src="https://surveybuilder.na3.visual.force.com/resource/1490095190000/SurveyBuilder__help" Class="helpIcon"   style="display:inline-block !important;"  />
+                                          <span class="tooltiptext" >{!$ObjectType.survey__c.Fields.dateToSendSurvey__c.inlineHelpText}</span>
+                                      </div>
+                                       
+                                </apex:outputPanel>
+                                </div>
+                            </div>
+                            <div class="formFeild no-margin-bottom">
+                                <div class="feild">
+                                    <!--  <apex:commandButton styleClass="green-btn"
+																						id="create" action="{! createSurvey }"  value="Save" />
+			&nbsp;&nbsp; -->
+                                    <apex:commandButton styleClass="green-btn default-btn" id="next" action="{! manageQuestions }"  value="Next" />
+                                </div>
+                            </div>
+                        </apex:form>
+                        </div>
+                    </div>
+                     </div>
+                </div>
+            </section>
+             </div>
+                <apex:include pageName="SurveyBuilder__surveyFooter" />
+        </body>
+    </html>
+</apex:page>

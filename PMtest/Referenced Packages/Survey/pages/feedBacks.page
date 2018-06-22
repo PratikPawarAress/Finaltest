@@ -1,0 +1,82 @@
+<apex:page id="thePage" showHeader="false" docType="HTML-5.0" action="{!fromSurveyList}"  sidebar="false" standardStylesheets="false" controller="SurveyBuilder.surveyFeedBack" >   
+    <html>
+        <head>
+            <title>View Feedbacks</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+            <apex:includeScript value="{!$Resource.SurveyBuilder__question}"/>
+        </head>
+        <body class="view-feedbacks-page">
+            <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+            <c:topPageNavigation myPageTitle="View Feedbacks" /> 
+            <section class="bodyContainer">
+                <div class="container clear">
+                    <div class="white-box">
+                        <div class="sectionTitle"> Feedback 
+                            <apex:outputLink value="{!$Page.SurveyBuilder__surveyList}"  styleClass="back-btn">
+                                Go to Manage Survey
+                            </apex:outputLink>
+                        </div>
+    <div class="form-box-outer">
+        
+                    
+                        <apex:form >
+                            <div Class="formFeild clear no-padding" > 
+                                
+                                <div class="feild feedbacks-top-btn-section">
+                                   <div class="select-outer">
+                                   <apex:selectList value="{!strSelected}" styleClass="requiredInput optionText" multiselect="false" size="1">
+                                            <apex:selectOption itemValue="" itemLabel="Select survey" />
+                                            <apex:selectOptions value="{!options}"/>
+                                    </apex:selectList>
+                                    </div>
+                                    <apex:inputText value="{!searchByEmail}" html-placeholder="Enter email address" styleClass="requiredInput optionText" />
+                                   <span class="filter-reset-btn-outer">
+                                    <apex:commandButton value="Filter" action="{! searchFeedback }" styleClass="green-btn filter-btn fitlerLeftSpace" reRender="feedBackList" />
+                                   
+                                    <apex:commandButton value="Reset" action="{! Reload }" styleClass="green-btn reload-btn fitlerLeftSpace" reRender="feedBackList"/>
+                                  </span>
+                                    </div>
+                                
+                             </div> 
+                        </apex:form>  
+        			<div class="table-responsive">
+                        
+       
+                     <apex:outputPanel id="feedBackList" layout="block">    
+                         <apex:form >
+                            <apex:dataTable value="{!feedBackList}" var="s" styleClass="defaultTable no-padding">
+                            <apex:column headerValue="Survey" styleClass="Outputter3" >
+                                  <apex:outputField value="{!s.surveyId__r.Name}" />
+                            </apex:column>
+                            <apex:column headerValue="Rating" styleClass="Outputter3" >
+                                 <apex:outputField value="{!s.SurveyBuilder__rating__c}" />
+                            </apex:column>
+                            
+                            <apex:column headerValue="Type of user " styleClass="Outputter3" >
+                                  <apex:outputField rendered="{!s.surveyRecipientId__r.typeOfRecipient__c != null }" value="{!s.surveyRecipientId__r.SurveyBuilder__typeOfRecipient__c}" />
+                                  <apex:outputText rendered="{!s.surveyRecipientId__r.typeOfRecipient__c == null }" value="staff" />
+                            </apex:column>
+                            <apex:column headerValue="Feedback by " styleClass="Outputter3" >
+                                  <apex:outputField rendered="{!s.SurveyRecipientId__r.email__c != null }" value="{!s.SurveyRecipientId__r.SurveyBuilder__email__c}" />
+                                  <apex:outputText rendered="{!s.SurveyRecipientId__r.email__c == null }" value="{!s.userId__r.Email }" />
+                            </apex:column>
+                            <apex:column styleClass="Outputter3" style="text-align:right;"> <!-- headerValue="Action" -->
+                                  <apex:outputLink value="/apex/ViewFeedbackDetails?id={!s.Id}" target="_blank">
+                                    View
+                                    </apex:outputLink> 
+                            </apex:column>
+                         </apex:dataTable>
+                         <c:globalPageIniation pagingObject="{!con}" />
+                         </apex:form>
+                         </apex:outputPanel>
+                          </div>  
+         </div>
+                    </div> 
+                </div> 
+            </section>  
+              </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" /> 
+        </body>
+    </html>
+</apex:page>

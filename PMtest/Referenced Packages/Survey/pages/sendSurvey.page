@@ -1,0 +1,120 @@
+<apex:page controller="SurveyBuilder.sendSurvey" sidebar="false" showHeader="false" 
+           applyHtmlTag="false" standardStylesheets="false" applyBodyTag="false" docType="HTML-5.0">
+    <html>
+        <head>
+            <script>
+            function clickToDelete(srId,surveyId) {
+                $.confirm({
+                    'title'     : 'Confirm before continue',
+                    'message'   : 'Are you sure you want to delete' ,
+                    'buttons'   : {
+                        'Yes'   : {
+                            'class' : 'blue',
+                            'action': function(){
+                                deleteTemplate(srId,surveyId);
+                                setTimeout(function() { location.reload(); }, 2000);
+                            }
+                        },
+                        'No'    : {
+                            'class' : 'gray',
+                            'action': function(){
+                                return false;
+                            }  // Nothing to do in this case. You can as well omit the action property.
+                        }
+                    }
+                });
+                
+                return false;
+            }
+            </script>
+            <title>Send Survey</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags"/>
+            <!-- for jquery alert box -->
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jqueryConfirmstyles, 'jqueryConfirmstyles/jqueryConfirmstyles.css')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyBuilder__jQueryConfirmCss, 'jquery.confirm/jquery.confirm.css')}"/>
+            <!-- for jquery alert box -->  
+        </head>
+        <body class="send-survey-page">
+            <div class="page-wrap">
+                <apex:include pageName="SurveyBuilder__surveyHeader"/>
+                <c:topPageNavigation myPageTitle="Send Survey"></c:topPageNavigation>
+                <section class="bodyContainer">
+                    <div class="container clear">
+                        <apex:form styleClass="searchForm">
+                            <div class="white-box">
+                                <apex:actionFunction name="deleteTemplate" action="{!deleteSurveyRecipientCOntroller}" reRender="opPnlRerender">
+                                    <apex:param id="aname1" name="srId" value="" assignTo="{!srId}"  />
+                                    <apex:param id="aname2" name="surveyId" value="" assignTo="{!surveyId}"  />
+                                </apex:actionFunction>
+                                <div Class="formFeild2">
+                                    <div class="feild2">
+                                        <apex:outputPanel styleClass="requiredInput clear" layout="block">
+                                            <div class="top-btn-outer clear">
+                                                <apex:commandLink styleClass="green-btn" value="Send Survey" style="font-weight: bold;" action="{!sendEmailToRecipient}" rendered="{!isHideButton}">
+                                                    <div class="tooltip">
+                                                        <apex:param name="sendSurvey" value="{! surveyId }" assignTo="{! surveyId }" />                                                    
+                                                    </div>
+                                                </apex:commandLink>
+                                                <apex:outputLink value="{! $page.previewSurvey }" styleClass="green-btn default-btn fitlerLeftSpace">
+                                                    View Preview
+                                                    <apex:param name="surveyId" value="{! surveyId }" />
+                                                </apex:outputLink>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                <apex:outputPanel id="opPnlRerender" layout="block" >
+                                    <c:surveyTabs surveyId="{!surveyId}" />
+                                    <div class="form-box-outer clear">
+                                        <apex:outputText >                                         
+                                            <div class="sectionTitle"> Recipients allocated to Survey </div>
+                                        </apex:outputText>
+                                        <apex:pageMessages />
+                                        <div class="form-box-inner">
+                                            <div class="table-responsive">
+                                                
+                                                <apex:dataTable id="deleteEmail" value="{!surveyRecipient}" var="sr" style="width:100%;" styleClass="defaultTable recipients-table">
+                                                    <apex:column headerValue="Email" styleClass="Outputter3" >
+                                                        <apex:outputField value="{!sr.sur.SurveyBuilder__email__c}" />
+                                                        <apex:variable var="email" value="{!sr.sur.SurveyBuilder__email__c}"/>
+                                                    </apex:column>
+                                                    <apex:column headerValue="Type" styleClass="Outputter3" >
+                                                        <apex:outputField value="{!sr.sur.SurveyBuilder__typeOfRecipient__c}"/>
+                                                        <apex:variable var="typeOfR" value="{!sr.sur.SurveyBuilder__typeOfRecipient__c}" />
+                                                    </apex:column>
+                                                    <apex:column styleClass="Outputter3">
+                                                        <div class="tooltip">
+                                                            <!--  <apex:outputLink value="/apex/sendSurvey?srId={!sr.sur.id}&surveyId={!surveyId}" rendered="{!sr.selected}" onClick="return returnConfirm(this,'Are you sure to delete the Recipient?');">
+<apex:image url="{!$Resource.builder_deleteIcon}" />
+</apex:outputLink>
+-->
+                                                            <apex:commandLink onclick="return clickToDelete('{!sr.sur.id}','{!surveyId}')">
+                                                                <apex:image url="{!URLFOR($Resource.builder_deleteIcon) }"/>
+                                                            </apex:commandLink> 
+                                                            <span class="tooltiptext">Delete Recipient</span>
+                                                        </div>
+                                                    </apex:column>
+                                                </apex:dataTable>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <c:globalPageIniation rendered="{!(surveyRecipients.size != 0)}" pagingObject="{!con}" />
+                                    <apex:outputText rendered="{!(surveyrecipients.size == 0)}">
+                                        <div class="clear noRecords">
+                                            There are no recipient to display.
+                                        </div>
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </div>
+                        </apex:form>
+                    </div>
+                </section>
+            </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter" />            
+            <!-- for jquery alert box -->
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmJs}"/>
+            <apex:includeScript value="{!$Resource.SurveyBuilder__jQueryConfirmscript}"/> 
+            <!-- for jquery alert box -->
+        </body>
+    </html>
+</apex:page>

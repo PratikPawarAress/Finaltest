@@ -1,0 +1,65 @@
+<apex:page sidebar="false" showHeader="false" docType="HTML-5.0" controller="SurveyBuilder.emailSave" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="false">
+    <html>
+        <head>
+            <title>Survey Email Template</title>
+            <apex:stylesheet value="{!URLFOR($Resource.SurveyMasterCss, 'master.css') }"/>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags"/> 
+        </head>
+        <body class="email-template-page">
+            <div class="page-wrap">
+            <apex:include pageName="SurveyBuilder__surveyHeader" /> 
+    <c:topPageNavigation myPageTitle="Create New Email Template" /> 
+           <section class="bodyContainer">
+                <div class="container clearfix">
+                    <div class="white-box">
+                        <div class="sectionTitle">
+                            Email Template
+                            <apex:outputLink value="{!$Page.SurveyBuilder__listOfEmailTemplate}"  styleClass="back-btn">
+                                Go to Email Template
+                            </apex:outputLink>
+                        </div>
+                        
+                        <div class="floatRight clear">
+
+                        </div>
+                    
+                            <apex:form styleClass="mainForm clear">
+                                
+                                <div class="formFeild" id="formFeild1">
+                                <label> Subject </label>
+                                <div class="feild">
+                                    <apex:outputPanel styleClass="requiredInput" id="nameInsert" layout="block">
+                                       <apex:inputText value="{!nameInsert}" />
+                                        
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                              
+                                <div class="formFeild" id="formFeild2">
+                                <label> Body</label>
+                                <div class="feild">
+                                    <apex:outputPanel styleClass="requiredInput" id="descriptionInsert" layout="block">
+                                      <apex:inputTextarea value="{!descriptionInsert}" styleClass="ckeditor" richtext="true" />
+                                        
+                                    </apex:outputPanel>
+                                    <div class="spnEmailNote"> Note: Make use of  {URL} as a placeholder for Survey URL</div>
+                                </div>
+                            </div>
+                                
+                                <div class="formFeild">
+                             
+                                <div class="feild">
+                                    <apex:commandButton action="{!emailInsert}" value="Save" styleClass="green-btn default-btn"/>
+                                </div>
+                            </div>
+                                
+                            </apex:form>
+                        
+                    </div>
+                </div>
+            </section>
+                 </div>
+            <apex:include pageName="SurveyBuilder__surveyFooter"/>    
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,44 @@
+<apex:page controller="utilDetailsController">
+    <apex:form > 
+        <apex:pageBlock title="All Allocations Of : {!PageBlockName} From:{!frmdate}To:{!todate}">
+            <apex:pageBlockTable value="{!Allocmap}" var="nba" id="tableAllocation1">                      
+                <apex:column rendered="{!ShowPname}">    
+                    <apex:facet name="header">Project Name</apex:facet>
+                    {!Allocmap[nba].projectName}
+                </apex:column>  
+                <apex:column rendered="{!ShowEname}">    
+                    <apex:facet name="header">Employee Name</apex:facet>
+                    {!Allocmap[nba].empName}
+                </apex:column> 
+                <apex:column >    
+                    <apex:facet name="header">Allocation Start Date</apex:facet>
+                    {!Allocmap[nba].startD}
+                </apex:column>
+                <apex:column >    
+                    <apex:facet name="header">Allocation End Date</apex:facet>
+                    {!Allocmap[nba].endD}
+                </apex:column>
+                <apex:column rendered="{!ShowBillable}">    
+                    <apex:facet name="header">Billable</apex:facet>
+                    {!Allocmap[nba].BillableH}
+                </apex:column>
+                <apex:column rendered="{!ShowNonBillable}">    
+                    <apex:facet name="header">Non-Billable</apex:facet>
+                    {!Allocmap[nba].NonBillableH}
+                </apex:column>
+                <apex:column rendered="{!ShowBench}">    
+                    <apex:facet name="header">Bench</apex:facet>
+                    {!Allocmap[nba].Bench}
+                </apex:column>
+                <apex:column >    
+                    <apex:facet name="header">Leave</apex:facet>
+                    {!Allocmap[nba].Leave}
+                </apex:column>                
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons location="Bottom">
+                 <!--apex:commandButton value="Go Back" action="/apex/BenchReport"/--->  
+                 <apex:commandButton value="Go Back" action="/apex/BenchReport?ProjName={!projectName}&frmDate={!frmdate}&toDate={!todate}&rightselected={!rightselected}&Resourcename={!ResourceName}"/>  
+            </apex:pageBlockButtons>
+        </apex:pageBlock>       
+    </apex:form>
+</apex:page>

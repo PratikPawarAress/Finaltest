@@ -1,0 +1,54 @@
+<apex:page controller="TimeSheetPageController" showHeader="false">
+    <apex:form >
+        <apex:slds />
+        <script>
+        window.onload = function() {
+            if(!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
+        }
+        
+        </script>
+        <style>         
+            .secHeader{
+            background-color: #DCDCDC;
+            }
+            
+        </style>    
+        <div >
+            <div class="secHeader">
+                <apex:sectionHeader title="TimeSheets for {!projectName} : {!CRName} "/>
+            </div>
+            <apex:pageBlock id="page">
+             <!--apex:pageBlock id="page" title="Page - {!pageNumber}"-->
+                <apex:pageMessages ></apex:pageMessages>
+                
+                <apex:pageBlockTable value="{!listoftimesheets}" var="timeSheet" id="tabletimesheet" >
+                    <apex:column value="{!timeSheet.Date__c}" style="border:1px ridge #DCDCDC;padding:5px 10px 5px 10px;"/>
+                    <apex:column value="{!timeSheet.Task_Category__c}" style="border:1px ridge #DCDCDC;padding:5px 10px 5px 10px;" />
+                    <apex:column width="50%" value="{!timeSheet.Task_Description__c}" style="border:1px ridge #DCDCDC;padding:2px 10px 0px 10px;">
+                  	<apex:facet name="footer"><apex:outputLabel value="Total Hours"  /></apex:facet>
+                    </apex:column>
+                    <apex:column value="{!timeSheet.Hours_Spent__c}" style="border:1px ridge #DCDCDC;padding:5px 10px 5px 10px;">
+                        <apex:facet name="footer">{!totalHours}</apex:facet>
+                    </apex:column>
+                   <!--- <apex:column value="{!timeSheet.Status__c}"/>--->
+                    <apex:column headerValue="Action" style="border:1px ridge #DCDCDC;padding:5px 10px 5px 10px;">    
+                        <apex:commandLink action="{!editsheet}" value="Edit" rendered="{!timeSheet.Date__c=Today()}" oncomplete="refreshPage();" > 
+                            <apex:param name="timesheetID" value="{!timeSheet.Id}" assignTo="{!timesheetID}"></apex:param>
+                        </apex:commandLink>
+                    </apex:column>
+                 </apex:pageBlockTable>  
+               
+                 
+                <apex:pageBlockButtons >
+                    <apex:commandButton action="{!addTimeSheet}" value="Add TimeSheet" />
+                    <apex:commandButton action="{!goBack}" value="Go Back" />                           
+                </apex:pageBlockButtons>
+              
+            </apex:pageBlock>
+           
+        </div>
+    </apex:form>            
+</apex:page>

@@ -1,0 +1,52 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">   
+    <html>
+        <head>
+            <title>Survey Dashboard</title>
+            <apex:include pageName="SurveyBuilder__surveyHeaderTags" />
+         </head>
+         <body style-class="dashBoaredHome" >
+             <div class="page-wrap">
+                 <apex:include pageName="SurveyBuilder__surveyHeader" />  
+                 <section class="bodyContainer">
+                     <div class="container clear">
+                         <div class="white-box">
+                             <div class="sectionTitle"> Dashboard </div> 
+                             <div class="clear"></div>
+                             
+                             
+                             <div class="insideForm clear">
+                                 <div class="userName">
+                                     <p><b>Hello {!$User.FirstName} {!$User.LastName}</b> </p>                        
+                                 </div>
+                                 <h1 class="welcomeTxt">Welcome to Survey Builder <span>Now create your survey in minutes!</span></h1>
+                                 <div class="home-mainNav">
+                                     <a href="{!$Site.Prefix}{!$Page.SurveyBuilder__manageQuestions}" class="mainNav-box qb"><!--/apex/SBQuestionBank-->
+                                         <i><img src="{!$Resource.manageQuestionDashboard}" alt=""/></i>
+                                         <div class="nav-txt">Manage <span>Question</span></div>
+                                     </a>
+                                     <a href="{!$Site.Prefix}{!$Page.SurveyList}" class="mainNav-box cs">
+                                         <i><img src="{!$Resource.manageSurveyDashboard}" alt=""/></i>
+                                         <div class="nav-txt">Manage <span>Survey</span></div>
+                                     </a>
+                                     <!--<a href="{!$Site.Prefix}{!$Page.feedBacks}" class="mainNav-box ss">
+<i><img src="{!$Resource.IndexSendSurvey}" alt=""/></i>
+<div class="nav-txt">View <span>Feedbacks</span></div>
+</a>
+<a href="https://ap2.salesforce.com/00O50000004d9Np" class="mainNav-box r">  
+<i><img src="{!$Resource.IndexReport}" alt=""/></i>
+<div class="nav-txt">Report</div>
+</a> --> 
+                                 </div>
+                             </div>
+                             
+                             
+                             
+                             
+                         </div>
+                     </div>
+  </section>  
+             </div>
+             <apex:include pageName="SurveyBuilder__surveyFooter" />
+        </body>
+    </html>
+</apex:page>

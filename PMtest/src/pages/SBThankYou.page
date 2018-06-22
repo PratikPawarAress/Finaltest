@@ -1,0 +1,39 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" applyHtmlTag="true" standardStylesheets="true">
+<link rel="shortcut icon" href="https://aresspharmademo-dev-ed--c.na30.content.force.com/servlet/servlet.ImageServer?id=015360000016DoV&oid=00D360000001jAm&lastMod=1461319606000"/>
+<html>
+<head>
+<title>Thank You</title>
+<style>
+body{
+background: #ececec;
+font-family: 'Open Sans', sans-serif;
+color: #000;
+-webkit-font-smoothing: antialiased;
+font-size: 14px;
+}
+
+.HeaderMain{
+width: 60%;
+margin: 0 auto;
+padding: 30px;
+background: white;
+}
+.TickImage{width:80px; height:80px;}
+.MainLine{font-size:20px; font-weight:700;}
+.SubLine{font-size:16px; font-weight:400;}
+</style>
+</head>
+<body>
+<div class="HeaderMain">
+<center>
+<apex:image url="{!$Resource.greentick}" styleClass="TickImage"/>
+<p class="MainLine">Submission Successful</p>
+<p class="SubLine">Thank you for your valuable feedback</p><br /><br /><br /><br />
+<apex:form >
+<apex:commandButton style="display: inline-block;padding: 3px 15px;line-height: 35px;color: #fff;font-size: 15px;background: #75C181;border-radius: 35px;margin-bottom: 15px; min-width: 125px;text-align: center;" Value="Exit" onclick="window.close();"/>
+</apex:form>
+</center>
+</div>
+</body>
+</html>
+</apex:page>

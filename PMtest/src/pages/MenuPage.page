@@ -1,0 +1,169 @@
+<apex:page >
+<apex:form >
+<style>
+
+.drop_menu {
+    background:#005555;
+    padding:0;
+    margin:0;
+    list-style-type:none;
+    height:30px;
+}
+.drop_menu li { float:left; }
+.drop_menu li a {
+    padding:9px 20px;
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    font:12px arial, verdana, sans-serif;
+}
+
+/* Submenu */
+.drop_menu ul {
+    position:absolute;
+    left:-9999px;
+    top:-9999px;
+    list-style-type:none;
+}
+.drop_menu li:hover { position:relative; background:#5FD367; }
+.drop_menu li:hover ul {
+    left:0px;
+    top:30px;
+    background:#5FD367;
+    padding:0px;
+}
+
+.drop_menu li:hover ul li a {
+    padding:5px;
+    display:block;
+    width:168px;
+    text-indent:15px;
+    background-color:#5FD367;
+}
+.drop_menu li:hover ul li a:hover { background:#005555; }
+</style>
+<!--<html>
+  <body data-spy="scroll" data-target=".navbar-fixed-top"  >
+    
+  <!--navbar-fixed-top-->
+  <!--<header id="section_header" class="navbar-fixed-top" role="banner">
+    <div class="container">
+      <div class="row">
+       <a href="index.html" class="navbar-brand">
+        <img alt="aress" src="images/logo2.png"/> </a> 
+        <a href="#" class="toggleMenu" style="display: none;">&nbsp;</a>
+        <nav class="main-nav fullwidth">
+          <ul class="nav" id="nav">
+            <li ><a href="index.html">Home</a></li>
+            <li class="active"> <a href="javascript:void(0)" class="parent">Development</a>
+              <ul>
+                <li > <a href="javascript:void(0)" class="parent">Services</a>
+                  <ul>
+                    <li><a href="http://www.aress.com/web-development-design.html">Web Development and Design</a></li>
+                    <li><a href="http://www.aress.com/custome-app-developement.html">Custom Application Development and Maintenance</a></li>
+                    <li><a href="http://www.aress.com/salesforce.html">Salesforce Development</a></li>
+                    <li><a href="http://www.aress.com/mobile-app-development.html">Mobile Application Development</a></li>
+                    <li><a href="http://www.aress.com/software-development.html">Software Product Development</a></li>
+                    <li><a href="http://www.aress.com/cloud-base-app-development.html">Cloud based Application Development</a></li>
+                    <li><a href="http://www.aress.com/independent-soft-testing-services.html">Independent Software Testing Services</a></li>
+                  </ul>
+                </li>
+                <li class=""> <a href="javascript:void(0)" class="parent">Platforms</a>
+                  <ul>
+                    <li><a href="http://www.aress.com/microsoft-development.html">Microsoft .Net Application Development</a></li>
+                    <li><a href="http://www.aress.com/ios-app-development.html">iOS App Development</a></li>
+                    <li><a href="http://www.aress.com/android-app-development.html">Android App Development</a></li>
+                    <li><a href="http://www.aress.com/windowPhone-app-development.html">Windows Phone App Development</a></li>
+                    <li><a href="http://www.aress.com/java-development.html">Java/J2EE Development</a></li>
+                    <li><a href="http://www.aress.com/opensource-development.html">Opensource Platforms Development</a></li>
+                  </ul>
+                </li>
+                 </ul>
+            </li>-->    
+            <!--</ul>
+        
+            </nav>
+           </div></div>
+           </header>-->
+             <!--<li > <a href="javascript:void(0)" class="parent">Outsourcing</a>
+              <ul>
+                <li><a href="http://www.aress.com/offshore-software-outsourcing.html">Offshore Software Outsourcing</a></li>
+                <li><a href="http://www.aress.com/soft-testing-qa-outsourcing.html">Software Testing &amp; QA Outsourcing</a></li>
+                <li><a href="http://www.aress.com/web-hosting-technical-support.html">24x7 Outsourced Technical Support</a></li>
+              </ul>
+            </li>
+            <li > <a href="javascript:void(0)" class="parent">Company </a>
+              <ul>
+                <li><a href="http://www.aress.com/who-we-are.html">Who we are</a></li>
+                <li><a href="http://www.aress.com/what-we-do.html"> What we do</a></li>
+                <li><a href="http://www.aress.com/customer-testimonials.html">What our customers say</a></li>
+                <li><a href="http://www.aress.com/working-with-us.html">Working with Aress</a></li>
+                <li><a href="http://www.aress.com/team.html">Our Team</a></li> 
+                <li><a href="http://www.aress.com/quality-focus.html">Quality Focus</a></li>
+                <li><a href="http://www.aress.com/corporate-ethos.html">Corporate Ethos &amp; CSR</a></li>
+              </ul>
+            </li>
+            <li ><a href="http://www.aress.com/contact-us.html">Contact us</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+</header>
+</body>
+</html>-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="menu.css" />
+<title>CSS Simple Drop Down Menu</title>
+</head>
+ <body data-spy="scroll" data-target=".navbar-fixed-top"  >
+ <!--navbar-fixed-top-->
+ 
+<div class="drop">
+<ul class="drop_menu">
+<li class="active"><a href="javascript:void(0)" class="parent">DEVELOPMENT</a>
+      <ul>
+                    <li><a href="http://www.aress.com/web-development-design.html">Web Development and Design</a></li>
+                    <li><a href="http://www.aress.com/custome-app-developement.html">Custom Application Development and Maintenance</a></li>
+                    <li><a href="http://www.aress.com/salesforce.html">Salesforce Development</a></li>
+                    <li><a href="http://www.aress.com/mobile-app-development.html">Mobile Application Development</a></li>
+                    <li><a href="http://www.aress.com/software-development.html">Software Product Development</a></li>
+                    <li><a href="http://www.aress.com/cloud-base-app-development.html">Cloud based Application Development</a></li>
+                    <li><a href="http://www.aress.com/independent-soft-testing-services.html">Independent Software Testing Services</a></li>
+                  </ul>
+                </li>
+                <li class=""> <a href="javascript:void(0)" class="parent">Platforms</a>
+                  <ul>
+                    <li><a href="http://www.aress.com/microsoft-development.html">Microsoft .Net Application Development</a></li>
+                    <li><a href="http://www.aress.com/ios-app-development.html">iOS App Development</a></li>
+                    <li><a href="http://www.aress.com/android-app-development.html">Android App Development</a></li>
+                    <li><a href="http://www.aress.com/windowPhone-app-development.html">Windows Phone App Development</a></li>
+                    <li><a href="http://www.aress.com/java-development.html">Java/J2EE Development</a></li>
+                    <li><a href="http://www.aress.com/opensource-development.html">Opensource Platforms Development</a></li>
+                  </ul>
+                </li>
+                 </ul>
+<!--<li><a href='#'>Link 2</a>
+    <ul>
+    <li><a href='#'>Sub Link 1</a></li>
+    <li><a href='#'>Sub Link 2</a></li>
+    <li><a href='#'>Sub Link 3</a></li>
+    <li><a href='#'>Sub Link 4</a></li>
+    </ul>
+</li>
+<li><a href='#'>Link 3</a>
+    <ul>
+    <li><a href='#'>Sub Link 1</a></li>
+    <li><a href='#'>Sub Link 2</a></li>
+    <li><a href='#'>Sub Link 3</a></li>
+    <li><a href='#'>Sub Link 4</a></li>
+    </ul>
+</li>
+</ul>-->
+</div>
+</body>
+</html>
+
+</apex:form>
+</apex:page>
